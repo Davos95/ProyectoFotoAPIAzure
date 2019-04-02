@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "login";
+}
+@section styles {
+    <link href="~/css/styleLogin.css" rel="stylesheet" />
+}
+<div class="row">
+    <div class="col s12" style="text-align:center">
+        <h3>Picture Manager</h3>
+    </div>
+    <div class="row"></div>
+    <div class="row" style="margin-top:5%">
+        <div class="col s12 m6 l6 xl4 offset-m3 offset-l3 offset-xl4">
+            <div class="card">
+                <div class="card-content">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="input-field">
+                            <input type="text" name="nick" id="nick" />
+                            <label for="nick"><i class="material-icons loginIcon">person</i>Nickname</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" name="password" id="password" />
+                            <label for="password"><i class="material-icons loginIcon">vpn_key</i>Password</label>
+                        </div>
+                        <div class="input-field">
+                            <button type="submit" class="btn green waves waves-effect waves-darken">ENTRAR</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

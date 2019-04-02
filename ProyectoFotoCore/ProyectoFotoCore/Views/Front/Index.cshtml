@@ -1,0 +1,21 @@
+﻿@using ProyectoFotoCore.Models
+@model List<PHOTO_COMPLEX>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+}
+@section styles{ 
+
+<link href="~/css/styleGridImagesFront.css" rel="stylesheet" />
+}
+
+<section id="photos" class="">
+    @if (Model.Count() > 0)
+    {
+        foreach (PHOTO_COMPLEX p in Model)
+        {
+            <img src="~/images/session/@p.SessionName/@p.Picture" />
+        }
+    }
+
+</section>

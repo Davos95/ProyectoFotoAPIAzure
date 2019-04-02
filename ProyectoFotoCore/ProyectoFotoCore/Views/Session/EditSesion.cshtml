@@ -1,0 +1,237 @@
+﻿@using ProyectoFotoCore.Models
+@model SESSION_COMPLEX
+
+@{
+    ViewBag.Title = "Editar Sesion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    List<PHOTO> photos = ViewBag.Photos;
+}
+
+@section styles {
+    
+<link href="~/css/styleEditSession.css" rel="stylesheet" />
+}
+@section events{
+    <script>
+        $(document).ready(function () {
+            M.AutoInit();
+            $("#Partner>.collection-item").click(function () {
+                if ($(this).css("background-color") == "rgb(224, 224, 224)") {
+                    $("#Partner>.collection-item").css("background-color", "white");
+                    $("#idPartner").val("");
+                } else {
+                    $("#Partner>.collection-item").css("background-color", "white");
+                    $(this).css("background-color", "rgb(224, 224, 224)");
+
+                    $("#idPartner").val($(this).data("partner"));
+                }
+            });
+            $("#Work>.collection-item").click(function () {
+                if ($(this).css("background-color") == "rgb(224, 224, 224)") {
+                    $("#Work>.collection-item").css("background-color", "white");
+
+                    $("#idWork").val();
+                } else {
+                    $("#Work>.collection-item").css("background-color", "white");
+                    $(this).css("background-color", "rgb(224, 224, 224)");
+
+                    $("#idWork").val($(this).data("work"));
+                }
+            });
+
+            $("#cardImage").click(function () {
+                $("#modalImages").modal('open');
+            });
+
+            $(".img").click(function () {
+                $("#modalImages").modal('close');
+
+                var id = $(this).attr('id');
+                var src = $(this).attr("src");
+
+                $("#idImageSession").val(id);
+                $("#imgPreview").attr("src",src);
+
+            });
+        });
+    </script>
+
+}
+
+<div class="row">
+    <div class="col s12 m3 l3 xl3">
+        <div class="card">
+            <div class="card-content">
+                <form method="post">
+                    <div class="input-field">
+                        <input type="text" name="name" id="name" value="@Model.Name" />
+                        <label for="name"><i class="material-icons iconInput">label</i>Nombre de la sesión</label>
+                    </div>
+                    <div class="input-field">
+                        <textarea name="description" placeholder="Descripcion">@Model.Description</textarea>
+                    </div>
+                    <div class="input-field">
+                        <input type="date" name="date" id="date" value="@ViewBag.Date" />
+                        <label for="date"><i class="material-icons iconInput">date_range</i>Fecha de la sesión</label>
+                    </div>
+                    <div class="input-field">
+                        <select name="comision" id="comision">
+                            @foreach (COMISION c in ViewBag.Comision)
+                            {
+                                if (c.Id == Model.IdComision)
+                                {
+                                    <option value="@c.Id" selected>@c.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@c.Id">@c.Name</option>
+                                }
+                            }
+                        </select>
+                        <label for="comision">Selecciona una Comision</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="hidden" name="idSesion" value="@Model.Id" />
+                        <button type="submit" name="option" value="MODIFY" class="btn waves-effect waves-darken green">Modificar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m9 l9 xl9">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col m5">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Trabajo</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.Workers != null)
+                                {
+                                    foreach (Worker_Session_Complex w in ViewBag.Workers)
+                                    {
+                                        <tr>
+                                            <td>@w.Partner</td>
+                                            <td>@w.Work</td>
+                                            <td><a href="@Url.Action("DeletePartnerWorkFromSesion","Session",new { idSesion = Model.Id, idPartner = w.IdPartner, idWork = w.IdWork })" style="float: right"><i class="material-icons" style="color: red;">backspace</i></a></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col m1">
+                        <div class="divAddButton">
+                            <form method="post">
+                                <input type="hidden" name="idSesion" value="@Model.Id" />
+                                <input type="hidden" name="idPartner" id="idPartner" />
+                                <input type="hidden" name="idWork" id="idWork" />
+                                <button type="submit" name="option" value="ADD" class="btn-floating btn-large green"><i class="large material-icons">add_circle</i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col m3">
+                        <div class="collection with-header" id="Partner">
+                            <div class="collection-header"><b>Participantes</b></div>
+                            @foreach (WORKER p in ViewBag.Partner)
+                            {
+                                <div class="collection-item" data-partner="@p.Id">@p.Name</div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="col m3">
+                        <div class="collection with-header" id="Work">
+                            <div class="collection-header"><b>Trabajos</b></div>
+                            @foreach (WORK w in ViewBag.Work)
+                            {
+                                <div class="collection-item" data-work="@w.Id">@w.Name</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12 m7 l6 xl5 offset-m5 offset-l6 offset-xl7">
+        <div class="card" >
+            <div class="card-content" >
+                <div class="row">
+                    <div class="col s6">
+                        <form method="post">
+                            <input type="hidden" id="idImageSession" name="idImage" value="0" />
+                            <input type="hidden" value="@Model.Id" name="idSesion" />
+                            <button id="setImage" class="btn waves-effect waves-darken green" name="option" value="SETIMAGE">Establecer imagen</button>
+                        </form>
+                    </div>
+                    <div class="col s6">
+                        <div style="border: 1px solid;" id="cardImage">
+                            @if (Model.IdPhoto != 0)
+                            {
+                                <img id="imgPreview" src="~/images/session/@Model.Name/@Model.Picture" style="object-fit:contain; width:100%;" />
+                            }
+                            else
+                            {
+                                <img id="imgPreview"  src="~/images/default/default.jpg" style="object-fit:contain; width:100%;" />
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalImages" class="modal">
+    <div class="modal-content">
+        <div class="col s12 m7 l8 xl9">
+            <div class="row gallery">
+                @if (photos.Count() > 0)
+                {
+                    foreach (PHOTO p in ViewBag.Photos)
+                    {
+                        <div class="col s12 m3">
+                            <div class="card col s12">
+                                <div id="div_@p.Id" class="box">
+                                    <div class="card-image">
+                                        <img src="~/images/Session/@Model.Name/@p.Picture" id="@p.Id" class="img" />
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-action">
+                                            <div class="textPhoto">
+                                                <span class="triggerImage">@p.Picture</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                }
+                else
+                {
+                    <h1>¡No hay fotos actualmente!</h1>
+                    <h1>¡Intenta subir unas cuantas!</h1>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+

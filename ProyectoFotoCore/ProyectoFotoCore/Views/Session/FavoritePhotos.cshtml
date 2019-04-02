@@ -1,0 +1,238 @@
+﻿@using ProyectoFotoCore.Models
+@model List<PHOTO_COMPLEX>
+
+@{
+    ViewData["Title"] = "FavoritePhotos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <style>
+
+        .btn {
+            width: 100%;
+            margin: 1.5em 0;
+            height: 3rem;
+        }
+
+        /*.img {
+            width: 240px;
+            height: 240px;
+            object-fit: contain;
+        }*/
+
+        /*.gallery .card .card-content {
+            padding: 1px;
+        }*/
+
+
+        /*.card-image {
+            margin: 1rem;
+        }*/
+
+        /*.textPhoto {
+            text-align: center;
+        }
+
+       
+
+        .triggerImage {
+            margin-left: 3.5em;
+            cursor: pointer;
+        }*/
+        .setFavorite {
+            cursor: pointer;
+        }
+        .card-title {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+    <link href="~/css/PreviewImage.css" rel="stylesheet" />
+    <link href="~/css/styleGridImagesFront.css" rel="stylesheet" />
+
+}
+
+
+@section events{
+    <script>
+        $(document).ready(function () {
+            M.AutoInit();
+
+            $(".triggerImage").click(function () {
+                $("#modalPreview").css("display", "block");
+                console.log($(this).parents(".card-image"));
+                $("#imagePreview").attr("src", $(this).parents(".card-image").children("img").attr("src"));
+
+            });
+
+            $("#modalPreview").click(function () {
+                $(this).css("display", "none");
+            });
+            
+            $("#order").click(function () {
+                var array = new Array();
+                $(".img").each(function () {
+                    array.push($(this).attr("id"));
+                });
+
+                var formData = new FormData();
+                formData.append("idPhotos", array);
+                $.ajax({
+                    type: "POST",
+                    url: "/Images/OrderFavorites",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data) {
+                            M.toast({ html: 'Se han ordenado las fotos correctamente!' });
+                        }
+                    }
+                });
+            });
+
+            $(".setFavorite").click(function () {
+                console.log("entra");
+                var id = $(this).data("value");
+                var formData = new FormData();
+                var objet = $(this);
+                formData.append("idPhoto", id);
+
+                if (objet.text() != "favorite") {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Images/SetFavorite",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            objet.text("favorite");
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Images/UndoFavorite",
+                        data: formData,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            objet.text("favorite_border");
+                        }
+                    });
+                }
+
+            });
+
+            var origen;
+            var flagImg = true;
+            $(".card-image").on("dragover", function (e) {
+                e.preventDefault();
+                //Recogemos el id del origen
+                if (flagImg) {
+                    origen = $(this).attr('id');
+                    flagImg = false;
+                }
+            }).on("drop", function (e) {
+                e.preventDefault();
+                var destino = $(this).attr('id');
+
+                /*Intercambio de imagenes*/
+                var origenImg = $("#" + origen + ">img").attr('src');
+                var destinoImg = $("#" + destino + ">img").attr('src');
+
+                $("#" + origen + ">img").attr('src', destinoImg);
+                $("#" + destino + ">img").attr('src', origenImg);
+
+                var origenIdImg = $("#" + origen + ">img").attr('id');
+                var destinoIdImg = $("#" + destino + ">img").attr('id');
+                $("#" + origen + ">img").attr('id', destinoIdImg);
+                $("#" + destino + ">img").attr('id', origenIdImg);
+
+                /* Intercambio de textos */
+
+                var origenTextoImagen = $("#" + origen + ">.card-title>span").text();
+                var destinoTextoImagen = $("#" + destino + ">.card-title>span").text();
+
+                $("#" + origen + ">.card-title>span").text(destinoTextoImagen);
+                $("#" + destino + ">.card-title>span").text(origenTextoImagen);
+
+                /* Intercambio de  iconos e ids booleanos */
+
+                var origenBool = $("#" + origen + ">.card-title>i").text();
+                var destinoBool = $("#" + destino + ">.card-title>i").text();
+
+                $("#" + origen + ">.card-title>i").text(destinoBool);
+                $("#" + destino + ">.card-title>i").text(origenBool);
+
+                var origenDataVal = $("#" + origen + ">.card-title>i").data("value");
+                var destinoDataVal = $("#" + destino + ">.card-title>i").data("value");
+
+                $("#" + origen + ">.card-title>i").data("value", destinoDataVal);
+                $("#" + destino + ">.card-title>i").data("value", origenDataVal);
+
+                flagImg = true;
+            });
+
+
+        });
+    </script>
+}
+
+<div class="row" style="padding: 1rem 1.2rem;">
+    <div class="col s12 m7 l8 xl9">
+        <div class="row gallery">
+            <div id="photos">
+                @if (Model.Count() > 0)
+                {
+                    foreach (PHOTO_COMPLEX p in Model)
+                    {
+                        <div class="card">
+                            <div class="card-image" id="div_@p.Id">
+                                <img src="~/images/Session/@p.SessionName/@p.Picture" draggable="true" id="@p.Id" class="img" />
+                                <span class="card-title" style="width: 100%">
+                                    @if (p.Favorite)
+                                    {
+                                        <i class="material-icons setFavorite" style="color:red; float: left" data-value="@p.Id">favorite</i>
+                                    }
+                                    else
+                                    {
+                                        <i class="material-icons setFavorite" style="color:red; float: left" data-value="@p.Id">favorite_border</i>
+                                    }
+                                    <span class="triggerImage" style="margin: 0 7em">@p.Picture</span>
+                                </span>
+
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h1>¡No hay fotos actualmente!</h1>
+                    <h1>¡Intenta subir unas cuantas!</h1>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m5 l4 xl3">
+        <div class="card" style="height:100%">
+            <div class="card-content">
+                <div class="input-field">
+                    <span class="card-title" style="display: flex; justify-content: center; align-items: center;">
+                        <i class="material-icons" style="margin: 0 10px; font-size: 2.2rem">photo_library</i>Ordenar Fotos
+                    </span>
+                    <button type="button" id="order" class="btn waves-effect waves-darken green">Ordenar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div id="modalPreview" class="modal-Preview">
+    <span class="close">&times;</span>
+    <img class="modal-content-Preview" id="imagePreview">
+    <div id="caption"></div>
+</div>

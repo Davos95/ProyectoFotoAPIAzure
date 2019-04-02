@@ -1,0 +1,42 @@
+﻿@using ProyectoFotoCore.Models
+@model List<WORK>
+@{
+    ViewBag.Title = "Works";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles {
+
+    <link href="~/css/stylePartners.css" rel="stylesheet" />
+}
+
+<div class="row " style="padding: 1rem 1.2rem;">
+    <div class="card col s12 m4 l4 xl3 offset-m1 offset-l1 offset-xl1">
+        <div class="card-title center-align title"><i class="material-icons iconTitle">note_add</i>Trabajo</div>
+        <form method="post">
+            <div class="input-field">
+                <input type="text" name="work" id="work" />
+                <label for="work"><i class="material-icons iconInput">label</i>Nombre del trabajo</label>
+            </div>
+            <input type="number" name="id" id="id" hidden />
+            <div class="input-field">
+                <button type="submit" name="option" value="0" class="btn waves-effect waves-darken green">Añadir</button>
+            </div>
+        </form>
+    </div>
+    <div class="card col s12 m6 l5 xl4 offset-m2 offset-l2 offset-xl2">
+        <div class="card-title center-align title">Trabajos</div>
+        <div class="card-content">
+            <table>
+                <tbody>
+                    @foreach (WORK w in Model)
+                    {
+                    <tr>
+                        <td>@w.Name</td>
+                        <td><a href="@Url.Action("DeleteWork", "PartnerWork", new { id = w.Id})"><i class="material-icons" style="color:red; float:right">backspace</i></a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

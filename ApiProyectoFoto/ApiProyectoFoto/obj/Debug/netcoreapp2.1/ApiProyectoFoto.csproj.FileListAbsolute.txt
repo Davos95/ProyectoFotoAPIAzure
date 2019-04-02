@@ -1,0 +1,14 @@
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.deps.json
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.runtimeconfig.json
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.runtimeconfig.dev.json
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.dll
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.csprojAssemblyReference.cache
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.csproj.CoreCompileInputs.cache
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorAssemblyInfo.cache
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorAssemblyInfo.cs
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.AssemblyInfoInputs.cache
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.AssemblyInfo.cs
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorTargetAssemblyInfo.cache
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.pdb
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.dll
+C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.pdb
