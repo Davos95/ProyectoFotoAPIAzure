@@ -15,11 +15,15 @@ namespace ProyectoFotoCore.Controllers
         IRepositorySesion repoSesion;
         IRepositoryPhoto repoPhoto;
         PathProv prov;
-        public ImagesController(IRepositorySesion repoS, IRepositoryPhoto repoP, PathProv prov)
+
+        RepositoryAzureBlob repository;
+        public ImagesController(IRepositorySesion repoS, IRepositoryPhoto repoP, PathProv prov, RepositoryAzureBlob repository)
         {
             this.repoSesion = repoS;
             this.repoPhoto = repoP;
             this.prov = prov;
+
+            this.repository = repository;
         }
 
         // GET: Images
@@ -36,10 +40,17 @@ namespace ProyectoFotoCore.Controllers
 
             String path = prov.MapPath(Folders.Session, sessionName);
 
+            this.repository.CrearContenedor("s"+idSesion.ToString());
+
             foreach (IFormFile file in Request.Form.Files)
             {
-                await ToolImage.UploadImage(file, path, null);
-                this.repoPhoto.InsertPhoto(file.FileName, idSesion);
+                //await ToolImage.UploadImage(file, path, null);
+                await this.repository.SubirBlob("s" + idSesion.ToString(), file);
+                String uri = await this.repository.GetUriBlob("s" + idSesion.ToString(), file.FileName);
+
+                this.repoPhoto.InsertPhoto(file.FileName, idSesion,uri);
+
+                
             }
 
             return Json(true);
@@ -57,8 +68,9 @@ namespace ProyectoFotoCore.Controllers
             foreach (String id in idArray)
             {
                 String namePhoto = this.repoPhoto.GetPhotoById(int.Parse(id)).Picture;
+                await this.repository.EliminarBlob("s" + idSesion.ToString(), namePhoto);
+
                 this.repoPhoto.RemovePhotos(int.Parse(id));
-                ToolImage.RemoveImage(namePhoto, path);
             }
 
             return Json(true);
@@ -93,8 +105,10 @@ namespace ProyectoFotoCore.Controllers
             {
                 int idPhoto = int.Parse(id);
                 String imageName = this.repoPhoto.GetPhotoById(idPhoto).Picture;
-                ToolImage.MoveImage(imageName, oldFolder, destinationFolder);
-                this.repoPhoto.MovePhotosSesion(idPhoto, session);
+                //ToolImage.MoveImage(imageName, oldFolder, destinationFolder);
+                await this.repository.MoverBlob("s" + oldSession.ToString(), imageName, "s" + session.ToString());
+                String uri = await this.repository.GetUriBlob("s" + session.ToString(), imageName);
+                this.repoPhoto.MovePhotosSesion(idPhoto, session,uri);
             }
             return Json(true);
         }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Provider;
 using ProyectoFotoCore.Repositories;
+using ProyectoFotoCore.Tools;
 
 namespace ProyectoFotoCore
 {
@@ -39,6 +40,7 @@ namespace ProyectoFotoCore
             services.AddTransient<IRepositorySesion, RepositorySesion>();
             services.AddTransient<IRepositoryWork, RepositoryWork>();
             services.AddTransient<PathProv>();
+            services.AddTransient<RepositoryAzureBlob>();
 
 
             services.AddSession(options => {

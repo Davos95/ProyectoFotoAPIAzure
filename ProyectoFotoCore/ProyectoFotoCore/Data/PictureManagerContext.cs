@@ -147,13 +147,14 @@ namespace ProyectoFotoCore.Data
             return this.Photos.FromSql(sql, pamId).ToList();
         }
 
-        public void InsertPhoto(string name, int idSesion)
+        public void InsertPhoto(string name, int idSesion, String UriAzure)
         {
-            String sql = "INSERTPHOTO @NAMEPHOTO,@IDSESION";
+            String sql = "INSERTPHOTO @NAMEPHOTO,@IDSESION,@URIAZURE";
             SqlParameter pamName = new SqlParameter("@NAMEPHOTO", name);
             SqlParameter pamId = new SqlParameter("@IDSESION", idSesion);
+            SqlParameter pamUri = new SqlParameter("@URIAZURE", UriAzure);
 
-            this.Database.ExecuteSqlCommand(sql, pamName, pamId);
+            this.Database.ExecuteSqlCommand(sql, pamName, pamId,pamUri);
         }
 
         public void RemovePhoto(int idPhoto)
@@ -173,13 +174,14 @@ namespace ProyectoFotoCore.Data
             this.Database.ExecuteSqlCommand(sql, pamId, pamOrder);
         }
 
-        public void MovePhotosSesion(int idPhoto, int idSesion)
+        public void MovePhotosSesion(int idPhoto, int idSesion, String uri)
         {
-            String sql = "MOVEPHOTOS @IDPHOTO,@IDSESION";
+            String sql = "MOVEPHOTOS @IDPHOTO,@IDSESION,@URIAZURE";
             SqlParameter pamIdPhoto = new SqlParameter("@IDPHOTO", idPhoto);
             SqlParameter pamIdSession = new SqlParameter("@IDSESION", idSesion);
+            SqlParameter pamURI = new SqlParameter("@URIAZURE", uri);
 
-            this.Database.ExecuteSqlCommand(sql, pamIdPhoto, pamIdSession);
+            this.Database.ExecuteSqlCommand(sql, pamIdPhoto, pamIdSession,pamURI);
         }
 
         public PHOTO GetPhotoById(int idPhoto)

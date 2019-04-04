@@ -238,7 +238,7 @@
 
                 console.log(origen);
                 console.log(destino);
-                
+
                 /*Intercambio de imagenes*/
                 var origenImg = $("#" + origen + ">img").attr('src');
                 var destinoImg = $("#" + destino + ">img").attr('src');
@@ -267,7 +267,7 @@
 
                 $("#" + origen + ">.card-title>input").attr("id", destinoCheck);
                 $("#" + destino + ">.card-title>input").attr("id", origenCheck);
-                
+
 
                 /* Intercambio de  iconos e ids booleanos */
 
@@ -289,64 +289,6 @@
                 flagImg = true;
             });
 
-
-
-            //$(".box")
-            //    .on("dragover", function (e) {
-            //        //RECOGEMOS INFORMACION DE LA IMAGEN ORIGEN
-            //        e.preventDefault();
-            //        if (flag) {
-            //            origenCaja = $(this).attr("id");
-            //            //origenCaja = origenCaja.split('_')[1];
-            //            console.log(origenCaja);
-            //            flag = false;
-            //        }
-            //    }).on("drop", function (e) {
-            //        //INTERCAMBIAMOS INFORMACION ENTRE LA IMAGEN ORIGEN Y LA DE DESTINO
-            //        e.preventDefault();
-            //        var destinoCaja = $(this).attr('id');
-
-            //        /* Intercambio de imagenes */
-            //        var origenImagen = $("#" + origenCaja + ">.card-image>label>img").attr('src');
-            //        var destinoImagen = $("#" + destinoCaja + ">.card-image>label>img").attr('src');
-
-            //        $("#" + destinoCaja + ">.card-image>label>img").attr('src',origenImagen);
-            //        $("#" + origenCaja + ">.card-image>label>img").attr('src', destinoImagen);
-
-            //        /* Intercambio de ids en checkboxes y referencias de labels */
-            //        var origenCheck = $("#" + origenCaja + ">.card-image>input").attr("id");
-
-            //        var destinoCheck = $("#" + destinoCaja + ">.card-image>input").attr("id");
-
-            //        $("#" + origenCaja + ">.card-image>input").attr("id", destinoCheck);
-            //        $("#" + origenCaja + ">.card-image>label").attr('for',destinoCheck);
-            //        $("#" + destinoCaja + ">.card-image>input").attr("id", origenCheck);
-            //        $("#" + destinoCaja + ">.card-image>label").attr('for', origenCheck);
-
-
-            //        /* Intercambio textos */
-            //        var origenTextoImagen = $("#" + origenCaja + ">.card-content>.card-action>div>span").text();
-            //        var destinoTextoImagen = $("#" + destinoCaja + ">.card-content>.card-action>div>span").text();
-
-            //        $("#" + origenCaja + ">.card-content>.card-action>div>span").text(destinoTextoImagen);
-            //        $("#" + destinoCaja + ">.card-content>.card-action>div>span").text(origenTextoImagen);
-
-            //        /* Intercambio de  iconos e ids booleanos */
-            //        var origenBool = $("#" + origenCaja + ">.card-content>.card-action>div>.setFavorite").text();
-            //        var destinoBool = $("#" + destinoCaja + ">.card-content>.card-action>div>.setFavorite").text();
-
-            //        $("#" + origenCaja + ">.card-content>.card-action>div>.setFavorite").text(destinoBool);
-            //        $("#" + destinoCaja + ">.card-content>.card-action>div>.setFavorite").text(origenBool);
-
-            //        var origenDataVal = $("#" + origenCaja + ">.card-content>.card-action>div>.setFavorite").data("value");
-            //        var destinoDataVal = $("#" + destinoCaja + ">.card-content>.card-action>div>.setFavorite").data("value");
-
-            //        $("#" + origenCaja + ">.card-content>.card-action>div>.setFavorite").data("value", destinoDataVal);
-            //        $("#" + destinoCaja + ">.card-content>.card-action>div>.setFavorite").data("value", origenDataVal);
-
-            //        flag = true;
-            //    });
-
         });
 
     </script>
@@ -362,9 +304,7 @@
                         {
                     <div class="card">
                         <div class="card-image" id="div_@p.Id">
-
-
-                            <img src="~/images/Session/@ViewBag.SessionName/@p.Picture" draggable="true" id="@p.Id" class="img triggerImage" />
+                            <img src="@p.UriAzure" draggable="true" id="@p.Id" class="img triggerImage" />
                             <span class="card-title card-title-foto" style="width: 100%">
                                 @if (p.Favorite)
                                 {
@@ -377,11 +317,8 @@
                                 <i class="material-icons check" style="color:white; float: left">check_box</i>
                                 <input type="checkbox" id="@p.Id" name="@p.Id" />
                                 <label class="toCheck"><span>@p.Picture</span></label>
-
                             </span>
-
                         </div>
-                        
                     </div>
                             
                         }
@@ -399,9 +336,9 @@
             <div class="card" style="height:100%">
                 <div class="card-content">
                     <div class="input-field">
-                        <span class="card-title" style="display: flex;
-    justify-content: center;
-    align-items: center;"><i class="material-icons" style="margin: 0 10px; font-size:2.2rem;">panorama</i>Mover Fotos</span>
+                        <span class="card-title" style="display: flex; justify-content: center;align-items: center;">
+                            <i class="material-icons" style="margin: 0 10px; font-size:2.2rem;">panorama</i>Mover Fotos
+                        </span>
                         <select id="sessions">
                             <option value="null" disabled selected>Selecciona una sessión</option>
                             @foreach (SESSION s in ViewBag.Sessions)
@@ -434,49 +371,3 @@
         <img class="modal-content-Preview" id="imagePreview">
         <div id="caption"></div>
     </div>
-
-
-
-    @*@if (Model.Count() > 0)
-            {
-                foreach (PHOTO p in Model)
-                {
-                    <div class="col s12 m3">
-                        <div class="card col s12">
-                            <div id="div_@p.Id" class="box">
-                                <div class="card-image">
-                                    <input type="checkbox" id="@p.Id" /><label for="@p.Id"><img src="~/images/Session/@ViewBag.SessionName/@p.Picture" draggable="true" id="img_@p.Id" class="img" /></label>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-action">
-                                        <div class="textPhoto">
-
-                                            <span class="triggerImage">@p.Picture</span>
-                                            <i class="material-icons check" style="color:green; float: right">check</i>
-                                            @if (p.Favorite)
-                                            {
-                                                <i class="material-icons setFavorite" style="color:red; float: right" data-value="@p.Id">favorite</i>
-                                            }
-                                            else
-                                            {
-                                                <i class="material-icons setFavorite" style="color:red; float: right" data-value="@p.Id">favorite_border</i>
-                                            }
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                }
-
-            }
-            else
-            {
-                <h1>¡No hay fotos actualmente!</h1>
-                <h1>¡Intenta subir unas cuantas!</h1>
-            }
-
-        *@

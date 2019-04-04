@@ -11,8 +11,8 @@ namespace ProyectoFotoCore.Repositories
     public interface IRepositoryPhoto
     {
         List<PHOTO> GetPhotos(int idSesion);
-        void InsertPhoto(String name, int idSesion);
-        void MovePhotosSesion(int idPhoto, int idSesion);
+        void InsertPhoto(String name, int idSesion,String UriAzure);
+        void MovePhotosSesion(int idPhoto, int idSesion,String UriAzure);
         void OrderPhotos(int idPhoto, int orderNumber);
         void RemovePhotos(int idPhoto);
         PHOTO GetPhotoById(int idPhoto);

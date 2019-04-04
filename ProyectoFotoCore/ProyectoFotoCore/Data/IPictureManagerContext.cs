@@ -46,10 +46,10 @@ namespace ProyectoFotoCore.Data
 
         #region Photo
         List<PHOTO> GetPhotos(int idSesion);
-        void InsertPhoto(String name, int idSesion);
+        void InsertPhoto(String name, int idSesion, String UriAzure);
         void RemovePhoto(int idPhoto);
         void OrderPhoto(int idPhoto, int orderNumber);
-        void MovePhotosSesion(int idPhoto, int idSesion);
+        void MovePhotosSesion(int idPhoto, int idSesion, String uri);
         PHOTO GetPhotoById(int idPhoto);
         #endregion
 

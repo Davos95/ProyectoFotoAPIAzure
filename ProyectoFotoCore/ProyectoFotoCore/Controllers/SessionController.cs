@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.WindowsAzure.Storage.Blob;
 using ProyectoFotoCore.Filters;
 using ProyectoFotoCore.Models;
 using ProyectoFotoCore.Provider;
@@ -25,7 +26,8 @@ namespace ProyectoFotoCore.Controllers
         IRepositoryWork repoWork;
         IRepositoryPhoto repoPhoto;
         PathProv prov;
-        public SessionController(IRepositoryComision repoC, IRepositorySesion repoS, IRepositoryPartner repoP, IRepositoryWork repoW, IRepositoryPhoto repoPh, PathProv prov)
+        RepositoryAzureBlob repoBlob;
+        public SessionController(IRepositoryComision repoC, IRepositorySesion repoS, IRepositoryPartner repoP, IRepositoryWork repoW, IRepositoryPhoto repoPh, PathProv prov, RepositoryAzureBlob repoBlob)
         {
             this.repoComision = repoC;
             this.repoSesion = repoS;
@@ -33,6 +35,7 @@ namespace ProyectoFotoCore.Controllers
             this.repoWork = repoW;
             this.repoPhoto = repoPh;
             this.prov = prov;
+            this.repoBlob = repoBlob;
         }
 
         public IActionResult Sesion()
@@ -122,11 +125,21 @@ namespace ProyectoFotoCore.Controllers
         }
         #endregion
 
-        public IActionResult ManagePhotos(int idSesion)
+        public async Task<IActionResult> ManagePhotos(int idSesion)
         {
             ViewBag.SessionName = this.repoSesion.GetSESIONID(idSesion).Name;
             ViewBag.Sessions = this.repoSesion.GetSesions().Where(x => x.Id != idSesion).ToList();
             ViewBag.IdSesion = idSesion;
+
+           
+            //foreach (CloudBlockBlob blob in )
+            //{
+            //    String url = blob.StorageUri.PrimaryUri.ToString();
+            //    String size = blob.Properties.Length.ToString();
+            //    String name = blob.Name;
+            //    String hola = "algo";
+            //}
+
             return View(this.repoPhoto.GetPhotos(idSesion));
         }
 
