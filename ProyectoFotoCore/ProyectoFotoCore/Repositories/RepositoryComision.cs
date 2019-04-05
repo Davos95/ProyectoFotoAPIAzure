@@ -93,12 +93,12 @@ namespace ProyectoFotoCore.Repositories
             return comision;
         }
 
-        public void InsertComision(String name, String description, String folder, IFormFile image, float price)
+        public void InsertComision(String name, String description, String folder, IFormFile image, float price, String UriAzure)
         {
             String type = image.ContentType.Split('/')[1];
             String path = Path.Combine(folder, name + "." + type);
             System.Diagnostics.Debug.WriteLine(path);
-            context.InsertComision(name, description, path, price);
+            context.InsertComision(name, description, path, price, UriAzure);
         }
 
         public void DeleteComision(int id, String folder)
@@ -109,13 +109,13 @@ namespace ProyectoFotoCore.Repositories
             this.context.DeleteComision(id);
         }
 
-        public void ModifyComision(int id, String name, String description, String folder, String image, float price)
+        public void ModifyComision(int id, String name, String description, String folder, String image, float price, String UriAzure)
         {
             if (image != null)
             {
                 image = folder + image;
             }
-            this.context.ModifyComision(id, name, image, description, price);
+            this.context.ModifyComision(id, name, image, description, price,UriAzure);
         }
 
         public void OrderComision(String [] order)

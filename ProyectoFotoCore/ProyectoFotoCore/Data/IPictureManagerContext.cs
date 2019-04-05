@@ -24,9 +24,9 @@ namespace ProyectoFotoCore.Data
         #region Comisions
 
         List<COMISION> GetCOMISIONS();
-        void InsertComision(String name, String description, String path, float price);
+        void InsertComision(String name, String description, String path, float price, String UriAzure);
         void DeleteComision(int id);
-        void ModifyComision(int id, String name, String image, String description, float price);
+        void ModifyComision(int id, String name, String image, String description, float price, String UriAzure);
         void OrderComision(int id, int order);
         COMISION GetComisionByID(int id);
 

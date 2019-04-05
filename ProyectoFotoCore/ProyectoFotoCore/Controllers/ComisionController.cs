@@ -35,7 +35,8 @@ namespace ProyectoFotoCore.Controllers
             {
                 if (photo != null && photo.Length > 0)
                 {
-                    ToolImage.UploadImage(photo,path,name);
+                    //ToolImage.UploadImage(photo,path,name);
+
                     repo.InsertComision(name, description, "~/images/comision\\", photo, price);
                 }
             }

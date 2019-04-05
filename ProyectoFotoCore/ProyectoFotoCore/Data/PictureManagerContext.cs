@@ -41,15 +41,16 @@ namespace ProyectoFotoCore.Data
             return this.Comisions.FromSql(sql).ToList();
         }
 
-        public void InsertComision(string name, string description, string path, float price)
+        public void InsertComision(string name, string description, string path, float price, String UriAzure)
         {
-            String sql = "INSERTCOMISION @NAME,@DESCRIPTION,@PATH,@PRICE";
+            String sql = "INSERTCOMISION @NAME,@DESCRIPTION,@PATH,@PRICE,@URIAZURE";
             SqlParameter pamName = new SqlParameter("@NAME", name);
             SqlParameter pamDescription = new SqlParameter("@DESCRIPTION", description);
             SqlParameter pamPath = new SqlParameter("@PATH", path);
             SqlParameter pamPrice = new SqlParameter("@PRICE", price);
+            SqlParameter pamUri = new SqlParameter("@URIAZURE", UriAzure);
 
-            this.Database.ExecuteSqlCommand(sql, pamName, pamDescription, pamPath, pamPrice);
+            this.Database.ExecuteSqlCommand(sql, pamName, pamDescription, pamPath, pamPrice,pamUri);
         }
 
         public void DeleteComision(int id)
@@ -59,16 +60,17 @@ namespace ProyectoFotoCore.Data
             this.Database.ExecuteSqlCommand(sql, pamId);
         }
 
-        public void ModifyComision(int id, string name, string image, string description, float price)
+        public void ModifyComision(int id, string name, string image, string description, float price,String UriAzure)
         {
-            String sql = "MODIFYSESSION @ID,@NAME,@PHOTO,@DESCRIPTION,@PRICE";
+            String sql = "MODIFYSESSION @ID,@NAME,@PHOTO,@DESCRIPTION,@PRICE,@URIAZURE";
             SqlParameter pamId = new SqlParameter("@ID", id);
             SqlParameter pamName = new SqlParameter("@NAME", name);
             SqlParameter pamPhoto = new SqlParameter("@PHOTO", image);
             SqlParameter pamDescription = new SqlParameter("@DESCRIPTION", description);
             SqlParameter pamPrice = new SqlParameter("@PRICE", price);
+            SqlParameter pamUri = new SqlParameter("@URIAZURE", UriAzure);
 
-            this.Database.ExecuteSqlCommand(sql, pamId, pamName, pamPhoto, pamDescription, pamPrice);
+            this.Database.ExecuteSqlCommand(sql, pamId, pamName, pamPhoto, pamDescription, pamPrice,pamUri);
         }
 
         public void OrderComision(int id, int order)
