@@ -12,3 +12,17 @@ C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netco
 C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.pdb
 C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.dll
 C:\Users\AlumnoMCSD\source\repos\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.pdb
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.deps.json
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.runtimeconfig.json
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.runtimeconfig.dev.json
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.dll
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.pdb
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.csprojAssemblyReference.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.csproj.CoreCompileInputs.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorAssemblyInfo.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorAssemblyInfo.cs
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.AssemblyInfoInputs.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.AssemblyInfo.cs
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorTargetAssemblyInfo.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.dll
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.pdb

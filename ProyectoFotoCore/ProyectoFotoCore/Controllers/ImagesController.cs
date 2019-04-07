@@ -96,16 +96,12 @@ namespace ProyectoFotoCore.Controllers
             String[] idArray = idPhotos.Split(',');
             String oldSession = Request.Form["oldSession"];
 
-            String sessionName = this.repoSesion.GetSESIONID(session).Name;
-            String oldSessionName = this.repoSesion.GetSESIONID(int.Parse(oldSession)).Name;
-            String oldFolder = prov.MapPath(Folders.Session, oldSessionName);
-            String destinationFolder = prov.MapPath(Folders.Session, sessionName);
+            this.repository.CrearContenedor("s" + session.ToString());
 
             foreach (String id in idArray)
             {
                 int idPhoto = int.Parse(id);
                 String imageName = this.repoPhoto.GetPhotoById(idPhoto).Picture;
-                //ToolImage.MoveImage(imageName, oldFolder, destinationFolder);
                 await this.repository.MoverBlob("s" + oldSession.ToString(), imageName, "s" + session.ToString());
                 String uri = await this.repository.GetUriBlob("s" + session.ToString(), imageName);
                 this.repoPhoto.MovePhotosSesion(idPhoto, session,uri);

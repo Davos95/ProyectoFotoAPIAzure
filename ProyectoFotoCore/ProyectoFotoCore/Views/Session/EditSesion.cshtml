@@ -181,7 +181,7 @@
                         <div style="border: 1px solid;" id="cardImage">
                             @if (Model.IdPhoto != 0)
                             {
-                                <img id="imgPreview" src="~/images/session/@Model.Name/@Model.Picture" style="object-fit:contain; width:100%;" />
+                                <img id="imgPreview" src="@Model.UriAzure" style="object-fit:contain; width:100%;" />
                             }
                             else
                             {
@@ -208,7 +208,7 @@
                             <div class="card col s12">
                                 <div id="div_@p.Id" class="box">
                                     <div class="card-image">
-                                        <img src="~/images/Session/@Model.Name/@p.Picture" id="@p.Id" class="img" />
+                                        <img src="@p.UriAzure" id="@p.Id" class="img" />
                                     </div>
                                     <div class="card-content">
                                         <div class="card-action">

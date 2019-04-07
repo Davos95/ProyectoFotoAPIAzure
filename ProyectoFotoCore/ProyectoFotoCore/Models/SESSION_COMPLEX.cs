@@ -25,5 +25,7 @@ namespace ProyectoFotoCore.Models
         public int IdComision { get; set; }
         [Column("PICTURE")]
         public String Picture { get; set; }
+        [Column("URIAZURE")]
+        public String UriAzure { get; set; }
     }
 }

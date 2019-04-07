@@ -24,6 +24,8 @@ namespace ApiProyectoFoto.Models
         public double Price { get; set; }
         [Column("PHOTO")]
         public String Photo { get; set; }
+        [Column("URIAZURE")]
+        public String UriAzure { get; set; }
 
     }
 }

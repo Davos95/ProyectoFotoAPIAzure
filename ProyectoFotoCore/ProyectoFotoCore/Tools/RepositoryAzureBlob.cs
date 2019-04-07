@@ -45,6 +45,25 @@ namespace ProyectoFotoCore.Tools
             return true;
         }
 
+        public async Task<bool> SubirBlob(String idSession, IFormFile image, String name)
+        {
+            CloudBlobContainer container = this.client.GetContainerReference(idSession);
+            CloudBlockBlob blobBlock = container.GetBlockBlobReference(name);
+            var tempPath = Path.GetTempFileName();
+            using (var stream = new FileStream(tempPath, FileMode.Create))
+            {
+                await image.CopyToAsync(stream);
+            }
+
+            using (var stream = new FileStream(tempPath, FileMode.Open))
+            {
+                await blobBlock.UploadFromStreamAsync(stream);
+            }
+
+            return true;
+        }
+
+
         public async Task<bool> EliminarBlob(String nombreContenedor, String nombreblob)
         {
             CloudBlobContainer container = this.client.GetContainerReference(nombreContenedor);
@@ -102,6 +121,13 @@ namespace ProyectoFotoCore.Tools
             await BlockblobDestino.StartCopyAsync(BlockblobOrigen);
             await BlockblobOrigen.DeleteIfExistsAsync();
 
+            return true;
+        }
+
+        public async Task<bool> EliminarContenedor(String nombreContenedor)
+        {
+            CloudBlobContainer container = this.client.GetContainerReference(nombreContenedor);
+            await container.DeleteIfExistsAsync();
             return true;
         }
 

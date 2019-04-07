@@ -23,5 +23,7 @@ namespace ApiProyectoFoto.Models
         public bool Favorite { get; set; }
         [Column("SESSIONNAME")]
         public String SessionName { get; set; }
+        [Column("URIAZURE")]
+        public String UriAzure { get; set; }
     }
 }

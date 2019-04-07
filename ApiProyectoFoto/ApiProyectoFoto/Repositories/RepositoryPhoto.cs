@@ -97,8 +97,6 @@ namespace ApiProyectoFoto.Repositories
             this.context = context;
         }
 
-
-
         public PHOTO GetPhotoById(int idPhoto)
         {
             return this.context.GetPhotoById(idPhoto);
@@ -109,23 +107,20 @@ namespace ApiProyectoFoto.Repositories
             return this.context.GetPhotos(idSesion);
         }
 
-        public void InsertPhoto(string name, int idSesion)
+        public void InsertPhoto(string name, int idSesion, String UriAzure)
         {
-            this.context.InsertPhoto(name, idSesion);
+            this.context.InsertPhoto(name, idSesion, UriAzure);
         }
 
-        public void MovePhotosSesion(int idPhoto, int idSesion)
+        public void MovePhotosSesion(int idPhoto, int idSesion, String UriAzure)
         {
-            this.context.MovePhotosSesion(idPhoto, idSesion);
+            this.context.MovePhotosSesion(idPhoto, idSesion, UriAzure);
         }
-
-
 
         public void OrderPhotos(int idPhoto, int orderNumber)
         {
             this.context.OrderPhoto(idPhoto, orderNumber);
         }
-
 
         public void RemovePhotos(int idPhoto)
         {

@@ -62,12 +62,10 @@ namespace ProyectoFotoCore.Controllers
         }
         #endregion
 
-        public ActionResult DeleteSesion(int id, String name)
+        public async Task<ActionResult> DeleteSesion(int id, String name)
         {
-            String path = prov.MapPath(Folders.Session, name);
-            ToolImage.DeleteFolder(path);
             this.repoSesion.DeleteSesion(id);
-
+            await this.repoBlob.EliminarContenedor("s" + id);
             return RedirectToAction("Sesion");
         }
 
@@ -130,15 +128,6 @@ namespace ProyectoFotoCore.Controllers
             ViewBag.SessionName = this.repoSesion.GetSESIONID(idSesion).Name;
             ViewBag.Sessions = this.repoSesion.GetSesions().Where(x => x.Id != idSesion).ToList();
             ViewBag.IdSesion = idSesion;
-
-           
-            //foreach (CloudBlockBlob blob in )
-            //{
-            //    String url = blob.StorageUri.PrimaryUri.ToString();
-            //    String size = blob.Properties.Length.ToString();
-            //    String name = blob.Name;
-            //    String hola = "algo";
-            //}
 
             return View(this.repoPhoto.GetPhotos(idSesion));
         }

@@ -13,7 +13,7 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
-      "Microsoft.AspNet.WebApi.Client/5.2.6": {
+      "Microsoft.AspNet.WebApi.Client/5.2.7": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "10.0.1",
@@ -4682,10 +4682,10 @@
         "tools/migrate.exe"
       ]
     },
-    "Microsoft.AspNet.WebApi.Client/5.2.6": {
-      "sha512": "91JMnE9zdIDphG00qgRvl8ZwKEjqAbNlJdfXUoMiIWPfpYyH7fyCsTSj6/aynRdw/Qr/K70xC7QC6MOJ1vFBJQ==",
+    "Microsoft.AspNet.WebApi.Client/5.2.7": {
+      "sha512": "/76fAHknzvFqbznS6Uj2sOyE9rJB3PltY+f53TH8dX9RiGhk02EhuFCWljSj5nnqKaTsmma8DFR50OGyQ4yJ1g==",
       "type": "package",
-      "path": "microsoft.aspnet.webapi.client/5.2.6",
+      "path": "microsoft.aspnet.webapi.client/5.2.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4695,7 +4695,7 @@
         "lib/netstandard2.0/System.Net.Http.Formatting.xml",
         "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll",
         "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.xml",
-        "microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
+        "microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
         "microsoft.aspnet.webapi.client.nuspec"
       ]
     },
@@ -12628,6 +12628,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "EntityFramework >= 6.2.0",
+      "Microsoft.AspNet.WebApi.Client >= 5.2.7",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.Azure.ConfigurationManager >= 4.0.0",
@@ -12680,6 +12681,10 @@
           "EntityFramework": {
             "target": "Package",
             "version": "[6.2.0, )"
+          },
+          "Microsoft.AspNet.WebApi.Client": {
+            "target": "Package",
+            "version": "[5.2.7, )"
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",

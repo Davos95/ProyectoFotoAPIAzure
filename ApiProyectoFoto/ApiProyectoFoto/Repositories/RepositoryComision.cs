@@ -91,29 +91,24 @@ namespace ApiProyectoFoto.Repositories
             return comision;
         }
 
-        public void InsertComision(String name, String description, String folder, IFormFile image, float price)
+        public void InsertComision(String name, String description, float price, String UriAzure)
         {
-            String type = image.ContentType.Split('/')[1];
-            String path = Path.Combine(folder, name + "." + type);
-            System.Diagnostics.Debug.WriteLine(path);
-            context.InsertComision(name, description, path, price);
+            context.InsertComision(name, description, "", price, UriAzure);
         }
 
         public void DeleteComision(int id, String folder)
         {
             COMISION comision = GetComisionByID(id);
-            String file = comision.Photo.Split('\\')[1];
-            File.Delete(folder + "\\" + file);
             this.context.DeleteComision(id);
         }
 
-        public void ModifyComision(int id, String name, String description, String folder, String image, float price)
+        public void ModifyComision(int id, String name, String description, String folder, String image, float price, String UriAzure)
         {
             if (image != null)
             {
                 image = folder + image;
             }
-            this.context.ModifyComision(id, name, image, description, price);
+            this.context.ModifyComision(id, name, image, description, price, UriAzure);
         }
 
         public void OrderComision(String[] order)

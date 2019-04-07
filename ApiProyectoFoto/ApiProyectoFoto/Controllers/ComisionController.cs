@@ -32,9 +32,9 @@ namespace ApiProyectoFoto.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public void Insert(COMISION com, IFormFile photo)
+        public void Insert(COMISION com)
         {
-            this.repo.InsertComision(com.Name, com.Description, "~/images/comision", photo, float.Parse(com.Price.ToString()));
+            this.repo.InsertComision(com.Name, com.Description, float.Parse(com.Price.ToString()),com.UriAzure);
         }
 
         [HttpPost]
@@ -42,6 +42,20 @@ namespace ApiProyectoFoto.Controllers
         public void Delete(int id, String folder)
         {
             this.repo.DeleteComision(id, folder);
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public void Modify(COMISION com)
+        {
+            this.repo.ModifyComision(com.Id, com.Name, com.Description, "", com.Name, float.Parse(com.Price.ToString()), com.UriAzure);
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public void Order(String[] order)
+        {
+            this.repo.OrderComision(order);
         }
 
     }

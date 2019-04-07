@@ -104,8 +104,6 @@ namespace ProyectoFotoCore.Repositories
         public void DeleteComision(int id, String folder)
         {
             COMISION comision = GetComisionByID(id);
-            String file = comision.Photo.Split('\\')[1];
-            File.Delete(folder+"\\"+file);
             this.context.DeleteComision(id);
         }
 

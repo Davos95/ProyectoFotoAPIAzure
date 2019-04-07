@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,13 @@ namespace ProyectoFotoCore.Controllers
     {
         PathProv prov;
         IRepositoryComision repo;
+        RepositoryAzureBlob repoAzure;
 
-        public ComisionController(IRepositoryComision repo, PathProv prov)
+        public ComisionController(IRepositoryComision repo, PathProv prov, RepositoryAzureBlob repoAzure)
         {
             this.repo = repo;
             this.prov = prov;
+            this.repoAzure = repoAzure;
         }
         public IActionResult Comision()
         {
@@ -27,7 +30,7 @@ namespace ProyectoFotoCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Comision(String name, String description, IFormFile photo, float price, int? id, String option)
+        public async Task<IActionResult> Comision(String name, String description, IFormFile photo, float price, int? id, String option)
         {
             String path = prov.MapPath(Folders.Comision);
 
@@ -35,9 +38,10 @@ namespace ProyectoFotoCore.Controllers
             {
                 if (photo != null && photo.Length > 0)
                 {
-                    //ToolImage.UploadImage(photo,path,name);
-
-                    repo.InsertComision(name, description, "~/images/comision\\", photo, price);
+                    this.repoAzure.CrearContenedor("comision");
+                    await this.repoAzure.SubirBlob("comision", photo, name);
+                    String uri = await this.repoAzure.GetUriBlob("comision", name);
+                    repo.InsertComision(name, description, "~/images/comision\\", photo, price, uri);
                 }
             }
             else if (option == "UPDATE")
@@ -45,18 +49,9 @@ namespace ProyectoFotoCore.Controllers
                 COMISION comision = this.repo.GetComisionByID(id.Value);
                 if (comision != null)
                 {
-                    String image = null;
-                    if (photo != null)
-                    {
-                        String photoRemove = comision.Photo.Split('\\')[1];
-                        ToolImage.RemoveImage(photoRemove, path);
-                        ToolImage.UploadImage(photo, path, name);
-
-                        String type = photo.ContentType.Split('/')[1];
-                        image = name + "." + type;
-                    }
-
-                    repo.ModifyComision(id.Value, name, description, "~/images/comision\\", image, price);
+                    await this.repoAzure.SubirBlob("comision", photo, name);
+                    String uri = await this.repoAzure.GetUriBlob("comision", name);
+                    repo.ModifyComision(id.Value, name, description, "~/images/comision\\", "", price, uri);
                 }
 
             }
@@ -66,6 +61,7 @@ namespace ProyectoFotoCore.Controllers
                 if (comision != null)
                 {
                     repo.DeleteComision(id.Value, path);
+                    await this.repoAzure.EliminarBlob("comision", name);
                 }
             }
 

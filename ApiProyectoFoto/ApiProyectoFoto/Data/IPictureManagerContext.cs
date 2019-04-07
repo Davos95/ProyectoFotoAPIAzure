@@ -23,9 +23,9 @@ namespace ApiProyectoFoto.Data
         #region Comisions
 
         List<COMISION> GetCOMISIONS();
-        void InsertComision(String name, String description, String path, float price);
+        void InsertComision(String name, String description, String path, float price, String UriAzure);
         void DeleteComision(int id);
-        void ModifyComision(int id, String name, String image, String description, float price);
+        void ModifyComision(int id, String name, String image, String description, float price, String UriAzure);
         void OrderComision(int id, int order);
         COMISION GetComisionByID(int id);
 
@@ -45,10 +45,10 @@ namespace ApiProyectoFoto.Data
 
         #region Photo
         List<PHOTO> GetPhotos(int idSesion);
-        void InsertPhoto(String name, int idSesion);
+        void InsertPhoto(String name, int idSesion, String UriAzure);
         void RemovePhoto(int idPhoto);
         void OrderPhoto(int idPhoto, int orderNumber);
-        void MovePhotosSesion(int idPhoto, int idSesion);
+        void MovePhotosSesion(int idPhoto, int idSesion, String uri);
         PHOTO GetPhotoById(int idPhoto);
         #endregion
 
