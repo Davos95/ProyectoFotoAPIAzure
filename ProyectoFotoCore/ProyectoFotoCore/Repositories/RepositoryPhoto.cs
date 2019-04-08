@@ -1,5 +1,6 @@
 ﻿using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Models;
+using ProyectoFotoCore.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,64 +94,77 @@ namespace ProyectoFotoCore.Repositories
 {
     public class RepositoryPhoto : IRepositoryPhoto
     {
-        IPictureManagerContext context;
-        public RepositoryPhoto(IPictureManagerContext context)
+        ApiConnect api;
+        public RepositoryPhoto(ApiConnect api)
         {
-            this.context = context;
+            this.api = api;
         }
 
        
 
-        public PHOTO GetPhotoById(int idPhoto)
+        public async Task<PHOTO> GetPhotoById(int idPhoto)
         {
-            return this.context.GetPhotoById(idPhoto);
+            return await this.api.CallApi<PHOTO>("api/Photo/GetPhotoById/" + idPhoto, null);
         }
 
-        public List<PHOTO> GetPhotos(int idSesion)
+        public async Task<List<PHOTO>> GetPhotos(int idSesion)
         {
-            return this.context.GetPhotos(idSesion);
+            return await this.api.CallApi<List<PHOTO>>("api/Photo/GetPhotos/" + idSesion, null);
         }
 
-        public void InsertPhoto(string name, int idSesion, String UriAzure)
+        public async Task InsertPhoto(string name, int idSesion, String UriAzure)
         {
-            this.context.InsertPhoto(name, idSesion, UriAzure);
+            PHOTO p = new PHOTO();
+            p.Picture = name;
+            p.IdSession = idSesion;
+            p.UriAzure = UriAzure;
+
+            await this.api.CallApiPost(p, "api/Photo/Insert", null);
         }
 
-        public void MovePhotosSesion(int idPhoto, int idSesion,String UriAzure)
+        public async Task MovePhotosSesion(int idPhoto, int idSesion,String UriAzure)
         {
-            this.context.MovePhotosSesion(idPhoto, idSesion, UriAzure);
+            PHOTO p = new PHOTO();
+            p.Id = idPhoto;
+            p.IdSession = idSesion;
+            p.UriAzure = UriAzure;
+            await this.api.CallApiPost(p, "api/Photo/Move", null);
         }
 
-        public void OrderPhotos(int idPhoto, int orderNumber)
+        public async Task OrderPhotos(List<Order> orders)
         {
-            this.context.OrderPhoto(idPhoto, orderNumber);
+            await this.api.CallApiPost(orders, "api/Photo/Order", null);
         }
 
 
-        public void RemovePhotos(int idPhoto)
+        public async Task RemovePhotos(int idPhoto)
         {
-            this.context.RemovePhoto(idPhoto);
+            await this.api.ApiDelete("api/Photo/Delete/" + idPhoto, null);
         }
 
         #region Favorites
-        public List<PHOTO_COMPLEX> GetFavorites()
+        public async Task<List<PHOTO_COMPLEX>> GetFavorites()
         {
-            return this.context.GetFavorites();
+            return await this.api.CallApi<List<PHOTO_COMPLEX>>("api/Photo/Favorites", null);
         }
 
-        public void SetFavorite(int idPhoto)
+        public async Task SetFavorite(int idPhoto)
         {
-            this.context.SetFavorite(idPhoto);
+            Order order = new Order();
+            order.id = idPhoto;
+            await this.api.CallApiPost(order, "api/Photo/SetFavorite", null);
         }
 
-        public void UndoFavorite(int idPhoto)
+        public async Task UndoFavorite(int idPhoto)
         {
-            this.context.UndoFavorite(idPhoto);
+            Order order = new Order();
+            order.id = idPhoto;
+            await this.api.CallApiPost(order, "api/Photo/UndoFavorite", null);
         }
 
-        public void OrderFavorite(int idPhoto, int orderFavorite)
+        public async Task OrderFavorite(List<Order> orders)
         {
-            this.context.OrderFavorite(idPhoto, orderFavorite);
+            await this.api.CallApiPost(orders, "api/Photo/OrderFavorite", null);
         }
 
         #endregion

@@ -38,9 +38,9 @@ namespace ProyectoFotoCore.Controllers
             this.repoBlob = repoBlob;
         }
 
-        public IActionResult Sesion()
+        public async Task<IActionResult> Sesion()
         {
-            List<SESSION_COMPLEX> sesions = this.repoSesion.GetSessionsComplex().ToList();
+            List<SESSION_COMPLEX> sesions = await this.repoSesion.GetSessionsComplex();
             return View(sesions);
         }
 
@@ -55,16 +55,14 @@ namespace ProyectoFotoCore.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSesion(String name, String description, DateTime date, int comision)
         {
-            //String path = prov.MapPath(Folders.Session, name);
-            //ToolImage.CreateFolder(path);
-            this.repoSesion.InsertSesion(name, description, date, comision);
+            await this.repoSesion.InsertSesion(name, description, date, comision);
             return RedirectToAction("Sesion");
         }
         #endregion
 
         public async Task<ActionResult> DeleteSesion(int id, String name)
         {
-            this.repoSesion.DeleteSesion(id);
+            await this.repoSesion.DeleteSesion(id);
             await this.repoBlob.EliminarContenedor("s" + id);
             return RedirectToAction("Sesion");
         }
@@ -72,14 +70,14 @@ namespace ProyectoFotoCore.Controllers
         #region Edit Sesion
         public async Task<IActionResult> EditSesion(int id)
         {
-            SESSION_COMPLEX sesion = this.repoSesion.GetSessionComplexById(id);
+            SESSION_COMPLEX sesion = await this.repoSesion.GetSessionComplexById(id);
 
             ViewBag.Date = sesion.DateSesion.ToString("yyyy-MM-dd");
             ViewBag.Comision = await this.repoComision.GetCOMISIONS();
             ViewBag.Partner = await this.repoPartner.GetPartners();
             ViewBag.Work = await this.repoWork.GetWORKs();
-            ViewBag.Workers = this.repoSesion.GetPartnerWorkBySesion(id);
-            ViewBag.Photos = this.repoPhoto.GetPhotos(id).ToList();
+            ViewBag.Workers = await this.repoSesion.GetPartnerWorkBySesion(id);
+            ViewBag.Photos = await this.repoPhoto.GetPhotos(id);
             return View(sesion);
         }
 
@@ -88,29 +86,28 @@ namespace ProyectoFotoCore.Controllers
         {
             if (option == "ADD")
             {
-                this.repoSesion.AddPartnerWorkIntoSesion(idSesion, idPartner.Value, idWork.Value);
+                await this.repoSesion.AddPartnerWorkIntoSesion(idSesion, idPartner.Value, idWork.Value);
             }
             else if (option == "MODIFY")
             {
-                String sessionName = this.repoSesion.GetSESIONID(idSesion).Name;
-                String path = prov.MapPath(Folders.Session);
+                SESSION session = await this.repoSesion.GetSESIONID(idSesion);
+                String sessionName = session.Name;
 
-                //ToolImage.RenameFolder(path, sessionName, name);
-                this.repoSesion.ModifySesion(idSesion, name, description, date.Value, comision.Value);
+                await this.repoSesion.ModifySesion(idSesion, name, description, date.Value, comision.Value);
             }
             else if (option == "SETIMAGE") {
-                this.repoSesion.SetImageSession(idSesion, idImage.Value);
+                await this.repoSesion.SetImageSession(idSesion, idImage.Value);
             }
 
 
-            SESSION_COMPLEX sesion = this.repoSesion.GetSessionComplexById(idSesion);
+            SESSION_COMPLEX sesion = await this.repoSesion.GetSessionComplexById(idSesion);
             ViewBag.Date = sesion.DateSesion.ToString("yyyy-MM-dd");
             ViewBag.Comision = await this.repoComision.GetCOMISIONS();
 
             ViewBag.Partner = await this.repoPartner.GetPartners();
             ViewBag.Work = await this.repoWork.GetWORKs();
-            ViewBag.Workers = this.repoSesion.GetPartnerWorkBySesion(idSesion);
-            ViewBag.Photos = this.repoPhoto.GetPhotos(idSesion).ToList();
+            ViewBag.Workers = await this.repoSesion.GetPartnerWorkBySesion(idSesion);
+            ViewBag.Photos = await this.repoPhoto.GetPhotos(idSesion);
             return View(sesion);
         }
 
@@ -125,16 +122,19 @@ namespace ProyectoFotoCore.Controllers
 
         public async Task<IActionResult> ManagePhotos(int idSesion)
         {
-            ViewBag.SessionName = this.repoSesion.GetSESIONID(idSesion).Name;
-            ViewBag.Sessions = this.repoSesion.GetSesions().Where(x => x.Id != idSesion).ToList();
+            SESSION session = await this.repoSesion.GetSESIONID(idSesion);
+            List<SESSION> sessions = await this.repoSesion.GetSesions();
+
+            ViewBag.SessionName = session.Name;
+            ViewBag.Sessions = sessions.Where(x => x.Id != idSesion).ToList();
             ViewBag.IdSesion = idSesion;
 
-            return View(this.repoPhoto.GetPhotos(idSesion));
+            return View(await this.repoPhoto.GetPhotos(idSesion));
         }
 
-        public IActionResult FavoritePhotos()
+        public async Task<IActionResult> FavoritePhotos()
         {
-            List<PHOTO_COMPLEX> favoritePhotos = this.repoPhoto.GetFavorites();
+            List<PHOTO_COMPLEX> favoritePhotos = await this.repoPhoto.GetFavorites();
             return View(favoritePhotos);
         }
 

@@ -24,9 +24,9 @@ namespace ProyectoFotoCore.Controllers
             this.repoSesion = repoSesion;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<PHOTO_COMPLEX> favoritePhotos = this.repoPhoto.GetFavorites();
+            List<PHOTO_COMPLEX> favoritePhotos = await this.repoPhoto.GetFavorites();
 
             return View(favoritePhotos);
             //return View();

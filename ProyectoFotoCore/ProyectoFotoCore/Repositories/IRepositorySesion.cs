@@ -10,19 +10,21 @@ namespace ProyectoFotoCore.Repositories
 {
     public interface IRepositorySesion
     {
-        List<SESSION> GetSesions();
-        void InsertSesion(String name, String description, DateTime date, int comision);
-        void DeleteSesion(int id);
-        SESSION GetSESIONID(int id);
-        void AddPartnerWorkIntoSesion(int idSesion, int idPartner, int idWork);
-        List<Worker_Session_Complex> GetPartnerWorkBySesion(int idSesion);
-        void DeletePartnerWorkFromSesion(int idSesion, int idPartner, int idWork);
+        Task<List<SESSION>> GetSesions();
+        Task<SESSION> GetSESIONID(int id);
 
-        void ModifySesion(int idSesion, String name, String desciption, DateTime date, int idComision);
+        Task InsertSesion(String name, String description, DateTime date, int comision);
+        Task ModifySesion(int idSesion, String name, String desciption, DateTime date, int idComision);
+        Task DeleteSesion(int id);
+        
 
-        void SetImageSession(int idSession, int idImage);
+        Task<List<Worker_Session_Complex>> GetPartnerWorkBySesion(int idSesion);
+        Task AddPartnerWorkIntoSesion(int idSesion, int idPartner, int idWork);
+        Task DeletePartnerWorkFromSesion(int idSesion, int idPartner, int idWork);
 
-        List<SESSION_COMPLEX> GetSessionsComplex();
-        SESSION_COMPLEX GetSessionComplexById(int idSession);
+
+        Task<List<SESSION_COMPLEX>> GetSessionsComplex();
+        Task<SESSION_COMPLEX> GetSessionComplexById(int idSession);
+        Task SetImageSession(int idSession, int idImage);
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Models;
+using ProyectoFotoCore.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,71 +77,97 @@ namespace ProyectoFotoCore.Repositories
 {
     public class RepositorySesion : IRepositorySesion
     {
-        IPictureManagerContext context;
-        public RepositorySesion(IPictureManagerContext context)
+        ApiConnect api;
+        public RepositorySesion(ApiConnect api)
         {
-            this.context = context;
+            this.api = api;
         }
 
-        public List<SESSION> GetSesions()
+        public async Task<List<SESSION>> GetSesions()
         {
-            var sesion = this.context.GetSesions();
+            var sesion = await this.api.CallApi<List<SESSION>>("api/Session",null);
             return sesion.ToList();
         }
 
-        public void InsertSesion(String name, String description, DateTime date, int comision)
+        public async Task<SESSION> GetSESIONID(int id)
         {
-            this.context.InsertSesion(name, description, date, comision);
-        }
-
-        public void DeleteSesion(int id)
-        {
-            this.context.DeleteSesion(id);
-        }
-
-        public SESSION GetSESIONID(int id)
-        {
-            SESSION sesion = this.context.GetSESIONID(id);
+            SESSION sesion = await this.api.CallApi<SESSION>("api/Session/Get/"+id,null);
             return sesion;
         }
 
+        public async Task InsertSesion(String name, String description, DateTime date, int comision)
+        {
+            SESSION s = new SESSION();
+            s.Name = name;
+            s.Description = description;
+            s.DateSesion = date;
+            s.IdComision = comision;
+            await this.api.CallApiPost(s, "api/Session/Insert", null);
+        }
+
+        public async Task ModifySesion(int idSesion, String name, String desciption, DateTime date, int idComision)
+        {
+            SESSION s = new SESSION();
+            s.Id = idSesion;
+            s.Name = name;
+            s.Description = desciption;
+            s.DateSesion = date;
+            s.IdComision = idComision;
+            await this.api.CallApiPost(s, "api/Session/Modify", null);
+        }
+
+        public async Task DeleteSesion(int id)
+        {
+            await this.api.ApiDelete("api/Session/Delete/" + id, null);
+        }
+
+
+
 
         #region EDIT SESION
-        public void AddPartnerWorkIntoSesion(int idSesion, int idPartner, int idWork)
+
+        public async Task<List<Worker_Session_Complex>> GetPartnerWorkBySesion(int idSesion)
         {
-            this.context.AddPartnerWorkIntoSesion(idSesion, idPartner, idWork);
+            return await this.api.CallApi<List<Worker_Session_Complex>>("api/Session/getPartnerWork/"+idSesion, null);
         }
 
-        public List<Worker_Session_Complex> GetPartnerWorkBySesion(int idSesion)
+        public async Task AddPartnerWorkIntoSesion(int idSesion, int idPartner, int idWork)
         {
-            return this.context.GetPartnerWorkBySesion(idSesion);
+            SESSION_WORKER sw = new SESSION_WORKER();
+            sw.IdSession = idSesion;
+            sw.IdWorker = idPartner;
+            sw.IdWork = idWork;
+            await this.api.CallApiPost(sw, "api/Session/addPartnerWork", null);
         }
 
-        public void DeletePartnerWorkFromSesion(int idSesion, int idPartner, int idWork)
+        public async Task DeletePartnerWorkFromSesion(int idSesion, int idPartner, int idWork)
         {
-            this.context.DeletePartnerWorkFromSesion(idSesion, idPartner, idWork);
-        }
-
-        public void ModifySesion(int idSesion, String name, String desciption, DateTime date, int idComision)
-        {
-            this.context.ModifySesion(idSesion, name, desciption, date, idComision);
-        }
-
-        public void SetImageSession(int idSession, int idImage)
-        {
-            this.context.SetImageSession(idSession, idImage);
-        }
-
-        public List<SESSION_COMPLEX> GetSessionsComplex()
-        {
-            return this.context.GetSessionsComplex();
-        }
-
-        public SESSION_COMPLEX GetSessionComplexById(int idSession)
-        {
-            return this.context.GetSessionComplexById(idSession);
+            SESSION_WORKER sw = new SESSION_WORKER();
+            sw.IdSession = idSesion;
+            sw.IdWorker = idPartner;
+            sw.IdWork = idWork;
+            await this.api.CallApiPost(sw, "api/Session/deletePartnerWork", null);
         }
 
         #endregion
+
+        public async Task<List<SESSION_COMPLEX>> GetSessionsComplex()
+        {
+            return await this.api.CallApi<List<SESSION_COMPLEX>>("api/Session/GetComplex", null);
+        }
+
+        public async Task<SESSION_COMPLEX> GetSessionComplexById(int idSession)
+        {
+            return await this.api.CallApi<SESSION_COMPLEX>("api/Session/GetComplexById/" + idSession, null);
+        }
+
+        public async Task SetImageSession(int idSession, int idImage)
+        {
+            Order order = new Order();
+            order.id = idSession;
+            order.order = idImage;
+            await this.api.CallApiPost(order, "api/Session/SetImageSession", null);
+        }
+
     }
 }

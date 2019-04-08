@@ -1,0 +1,15 @@
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Release\netcoreapp2.1\ApiProyectoFoto.deps.json
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Release\netcoreapp2.1\ApiProyectoFoto.runtimeconfig.json
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Release\netcoreapp2.1\ApiProyectoFoto.runtimeconfig.dev.json
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Release\netcoreapp2.1\ApiProyectoFoto.dll
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Release\netcoreapp2.1\ApiProyectoFoto.pdb
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.csprojAssemblyReference.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.csproj.CoreCompileInputs.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.RazorAssemblyInfo.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.RazorAssemblyInfo.cs
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.AssemblyInfoInputs.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.AssemblyInfo.cs
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.RazorTargetAssemblyInfo.cache
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.dll
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Release\netcoreapp2.1\ApiProyectoFoto.pdb

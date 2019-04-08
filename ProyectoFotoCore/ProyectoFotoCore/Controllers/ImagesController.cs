@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProyectoFotoCore.Models;
 using ProyectoFotoCore.Provider;
 using ProyectoFotoCore.Repositories;
 using ProyectoFotoCore.Tools;
@@ -27,34 +28,31 @@ namespace ProyectoFotoCore.Controllers
         }
 
         // GET: Images
-        public IActionResult UploadImages()
+        public async Task<IActionResult> UploadImages()
         {
-            return View(this.repoSesion.GetSesions());
+            return View(await this.repoSesion.GetSesions());
         }
 
         [HttpPost]
         public async Task<IActionResult> Upload()
         {
             int idSesion = int.Parse(Request.Form["idSesion"].ToString());
-            String sessionName = this.repoSesion.GetSESIONID(idSesion).Name;
-
-            String path = prov.MapPath(Folders.Session, sessionName);
+            SESSION session = await this.repoSesion.GetSESIONID(idSesion);
+            String sessionName = session.Name;
 
             this.repository.CrearContenedor("s"+idSesion.ToString());
 
             foreach (IFormFile file in Request.Form.Files)
             {
-                //await ToolImage.UploadImage(file, path, null);
                 await this.repository.SubirBlob("s" + idSesion.ToString(), file);
                 String uri = await this.repository.GetUriBlob("s" + idSesion.ToString(), file.FileName);
+                await this.repoPhoto.InsertPhoto(file.FileName, idSesion,uri);
 
-                this.repoPhoto.InsertPhoto(file.FileName, idSesion,uri);
-
-                
             }
 
             return Json(true);
         }
+
         [HttpPost]
         public async Task<IActionResult> DeleteImages(int idSesion)
         {
@@ -62,15 +60,19 @@ namespace ProyectoFotoCore.Controllers
 
             String[] idArray = idPhotos.Split(',');
 
-            String sessionName = this.repoSesion.GetSESIONID(idSesion).Name;
+            SESSION session = await this.repoSesion.GetSESIONID(idSesion);
+
+            String sessionName = session.Name;
             String path = prov.MapPath(Folders.Session, sessionName);
 
             foreach (String id in idArray)
             {
-                String namePhoto = this.repoPhoto.GetPhotoById(int.Parse(id)).Picture;
+                PHOTO photo = await this.repoPhoto.GetPhotoById(int.Parse(id));
+                String namePhoto = photo.Picture;
+
                 await this.repository.EliminarBlob("s" + idSesion.ToString(), namePhoto);
 
-                this.repoPhoto.RemovePhotos(int.Parse(id));
+                await this.repoPhoto.RemovePhotos(int.Parse(id));
             }
 
             return Json(true);
@@ -82,10 +84,16 @@ namespace ProyectoFotoCore.Controllers
             String idPhotos = Request.Form["idPhotos"];
             String[] idArray = idPhotos.Split(',');
 
+            List<Order> orders = new List<Order>();
             for (int i = 0; i < idArray.Length; i++)
             {
-                this.repoPhoto.OrderPhotos(int.Parse(idArray[i]), i);
+                Order order = new Order();
+                order.id = int.Parse(idArray[i]);
+                order.order = i;
+                orders.Add(order);
             }
+            await this.repoPhoto.OrderPhotos(orders);
+
             return Json(true);
         }
 
@@ -101,10 +109,11 @@ namespace ProyectoFotoCore.Controllers
             foreach (String id in idArray)
             {
                 int idPhoto = int.Parse(id);
-                String imageName = this.repoPhoto.GetPhotoById(idPhoto).Picture;
+                PHOTO photo = await this.repoPhoto.GetPhotoById(idPhoto);
+                String imageName = photo.Picture;
                 await this.repository.MoverBlob("s" + oldSession.ToString(), imageName, "s" + session.ToString());
                 String uri = await this.repository.GetUriBlob("s" + session.ToString(), imageName);
-                this.repoPhoto.MovePhotosSesion(idPhoto, session,uri);
+                await this.repoPhoto.MovePhotosSesion(idPhoto, session,uri);
             }
             return Json(true);
         }
@@ -112,13 +121,13 @@ namespace ProyectoFotoCore.Controllers
         [HttpPost]
         public async Task<IActionResult> SetFavorite(int idPhoto)
         {
-            this.repoPhoto.SetFavorite(idPhoto);
+            await this.repoPhoto.SetFavorite(idPhoto);
             return Json(true);
         }
         [HttpPost]
         public async Task<IActionResult> UndoFavorite(int idPhoto)
         {
-            this.repoPhoto.UndoFavorite(idPhoto);
+            await this.repoPhoto.UndoFavorite(idPhoto);
             return Json(true);
         }
 
@@ -127,11 +136,15 @@ namespace ProyectoFotoCore.Controllers
         {
             String idPhotos = Request.Form["idPhotos"];
             String[] idArray = idPhotos.Split(',');
-
+            List<Order> orders = new List<Order>();
             for (int i = 0; i < idArray.Length; i++)
             {
-                this.repoPhoto.OrderFavorite(int.Parse(idArray[i]), i);
+                Order order = new Order();
+                order.id = int.Parse(idArray[i]);
+                order.order = i;
+                orders.Add(order);
             }
+            await this.repoPhoto.OrderFavorite(orders);
             return Json(true);
         }
     }

@@ -90,7 +90,7 @@ namespace ProyectoFotoCore.Repositories
 
         public async Task<COMISION> GetComisionByID(int id)
         {
-            var comision = await this.api.CallApi<COMISION>("api/Comision?id=" + id, null);
+            var comision = await this.api.CallApi<COMISION>("api/Comision/Get/" + id, null);
             return comision;
         }
 

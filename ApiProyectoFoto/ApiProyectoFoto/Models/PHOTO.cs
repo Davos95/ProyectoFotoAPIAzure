@@ -20,5 +20,7 @@ namespace ApiProyectoFoto.Models
         public int OrderPhoto { get; set; }
         [Column("FAVORITE")]
         public bool Favorite { get; set; }
+        [Column("URIAZURE")]
+        public String UriAzure { get; set; }
     }
 }

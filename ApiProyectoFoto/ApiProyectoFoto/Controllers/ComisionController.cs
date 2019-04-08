@@ -25,6 +25,8 @@ namespace ApiProyectoFoto.Controllers
             return this.repo.GetCOMISIONS();
         }
 
+        [HttpGet]
+        [Route("[action]/{id}")]
         public COMISION Get(int id)
         {
             return this.repo.GetComisionByID(id);
@@ -37,11 +39,11 @@ namespace ApiProyectoFoto.Controllers
             this.repo.InsertComision(com.Name, com.Description, float.Parse(com.Price.ToString()),com.UriAzure);
         }
 
-        [HttpPost]
-        [Route("[action]")]
-        public void Delete(int id, String folder)
+        [HttpDelete]
+        [Route("[action]/{id}")]
+        public void Delete(int id)
         {
-            this.repo.DeleteComision(id, folder);
+            this.repo.DeleteComision(id);
         }
 
         [HttpPost]

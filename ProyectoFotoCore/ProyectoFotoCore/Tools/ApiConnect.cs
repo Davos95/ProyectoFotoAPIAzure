@@ -16,7 +16,7 @@ namespace ProyectoFotoCore.Tools
 
         public ApiConnect()
         {
-            this.uriapi = "https://localhost:44305/";
+            this.uriapi = "https://apiproyectofoto.azurewebsites.net/";
             this.headerjson = new MediaTypeWithQualityHeaderValue("application/json");
         }
 

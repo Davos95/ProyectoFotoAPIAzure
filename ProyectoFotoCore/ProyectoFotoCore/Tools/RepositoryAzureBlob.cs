@@ -15,7 +15,7 @@ namespace ProyectoFotoCore.Tools
         CloudBlobClient client;
         public RepositoryAzureBlob()
         {
-            String keys = "UseDevelopmentStorage=true";
+            String keys = "DefaultEndpointsProtocol=https;AccountName=storagephotodvb;AccountKey=fyAdiMByaW5eCz86k+Z3ujw1OU+F72rmAKSQ9N0YfmSElL8dUqE+cW8hK1xcRkeFq88lArS/vOKpz5UVKkEeBw==;EndpointSuffix=core.windows.net";
             CloudStorageAccount account = CloudStorageAccount.Parse(keys);
             this.client = account.CreateCloudBlobClient();
         }

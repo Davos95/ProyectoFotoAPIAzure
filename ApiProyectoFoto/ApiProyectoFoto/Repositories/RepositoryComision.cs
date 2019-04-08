@@ -96,7 +96,7 @@ namespace ApiProyectoFoto.Repositories
             context.InsertComision(name, description, "", price, UriAzure);
         }
 
-        public void DeleteComision(int id, String folder)
+        public void DeleteComision(int id)
         {
             COMISION comision = GetComisionByID(id);
             this.context.DeleteComision(id);

@@ -11,7 +11,7 @@ namespace ApiProyectoFoto.Repositories
     {
         List<COMISION> GetCOMISIONS();
         void InsertComision(String name, String description, float price, String UriAzure);
-        void DeleteComision(int id, String folder);
+        void DeleteComision(int id);
         void ModifyComision(int id, String name, String description, String folder, String image, float price, String UriAzure);
         void OrderComision(List<Order> orders);
         COMISION GetComisionByID(int id);
