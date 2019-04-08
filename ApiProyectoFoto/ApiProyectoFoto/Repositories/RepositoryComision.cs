@@ -111,13 +111,11 @@ namespace ApiProyectoFoto.Repositories
             this.context.ModifyComision(id, name, image, description, price, UriAzure);
         }
 
-        public void OrderComision(String[] order)
+        public void OrderComision(List<Order>orders)
         {
-            int numOrder = 0;
-            foreach (String value in order)
+            foreach (Order value in orders)
             {
-                this.context.OrderComision(int.Parse(value), numOrder);
-                numOrder++;
+                this.context.OrderComision(value.id, value.order);
             }
         }
     }

@@ -21,59 +21,59 @@ namespace ProyectoFotoCore.Controllers
         }
 
         //GET: PARTNERS
-        public IActionResult Partners()
+        public async Task<IActionResult> Partners()
         {
-            List<WORKER> p = this.repoP.GetPartners();
+            List<WORKER> p = await this.repoP.GetPartners();
             return View(p);
         }
 
         //POST: Partners
         [HttpPost]
-        public IActionResult Partners(String name, String contact, String urlContact, int option, int? id)
+        public async Task<IActionResult> Partners(String name, String contact, String urlContact, int option, int? id)
         {
             if (option == 1)
             {
-                this.repoP.InsertPartner(name, contact, urlContact);
+                await this.repoP.InsertPartner(name, contact, urlContact);
             }
             else
             if (option == 2)
             {
-                this.repoP.UpdatePartner(id.Value, name, contact, urlContact);
+                await this.repoP.UpdatePartner(id.Value, name, contact, urlContact);
             }
 
-            List<WORKER> p = this.repoP.GetPartners();
+            List<WORKER> p = await this.repoP.GetPartners();
             return View(p);
         }
 
-        public IActionResult DeletePartner(int id)
+        public async Task<IActionResult> DeletePartner(int id)
         {
-            this.repoP.RemovePartner(id);
+            await this.repoP.RemovePartner(id);
             return RedirectToAction("Partners");
         }
 
         //GET: WORKS
-        public IActionResult Works()
+        public async Task<IActionResult> Works()
         {
-            List<WORK> works = this.repoW.GetWORKs();
+            List<WORK> works = await this.repoW.GetWORKs();
             return View(works);
         }
 
         //POST: WORKS
         [HttpPost]
-        public ActionResult Works(String work, int option, int? id)
+        public async Task<ActionResult> Works(String work, int option, int? id)
         {
             if (option == 0)
             {
-                this.repoW.InsertWork(work);
+                await this.repoW.InsertWork(work);
             }
 
-            List<WORK> works = this.repoW.GetWORKs();
+            List<WORK> works = await this.repoW.GetWORKs();
             return View(works);
         }
 
-        public IActionResult DeleteWork(int id)
+        public async Task<IActionResult> DeleteWork(int id)
         {
-            this.repoW.DeleteWork(id);
+            await this.repoW.DeleteWork(id);
 
             return RedirectToAction("Works");
         }

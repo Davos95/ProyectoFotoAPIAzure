@@ -92,6 +92,7 @@
                                     <td>@w.Name</td>
                                     <td>@w.Contact</td>
                                     <td><a target="_blank" rel="" href="@w.UrlContact">@w.UrlContact</a></td>
+                                    <td hidden>@w.Id</td>
                                     <td><a href="@Url.Action("DeletePartner","PartnerWork",new { id = w.Id})"><i class="material-icons" style="color:red; float:right">backspace</i></a></td>
                                 </tr>
                             }

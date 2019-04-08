@@ -2,6 +2,7 @@
 
 using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Models;
+using ProyectoFotoCore.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,26 +37,28 @@ namespace ProyectoFotoCore.Repositories
 {
     public class RepositoryWork : IRepositoryWork
     {
-        IPictureManagerContext context;
+        ApiConnect api;
 
-        public RepositoryWork(IPictureManagerContext context) {
-            this.context = context;
+        public RepositoryWork(ApiConnect api) {
+            this.api = api;
         }
 
-        public List<WORK> GetWORKs()
+        public async Task<List<WORK>> GetWORKs()
         {
-            List<WORK> works = this.context.GetWORKs();
+            List<WORK> works = await this.api.CallApi<List<WORK>>("api/Work",null);
             return works;
         }
 
-        public void InsertWork(String name)
+        public async Task InsertWork(String name)
         {
-            this.context.InsertWork(name);
+            WORK w = new WORK();
+            w.Name = name;
+            await this.api.CallApiPost(w, "api/Work/Insert", null);
         }
 
-        public void DeleteWork(int id)
+        public async Task DeleteWork(int id)
         {
-            this.context.DeleteWork(id);
+            await this.api.ApiDelete("api/Work/Delete/" + id, null);
         }
 
     }

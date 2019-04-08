@@ -1,9 +1,11 @@
 ﻿
 using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Models;
+using ProyectoFotoCore.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 #region PROCEDURES
@@ -45,33 +47,43 @@ namespace ProyectoFotoCore.Repositories
 {
     public class RepositoryPartner : IRepositoryPartner
     {
-        IPictureManagerContext context;
+        ApiConnect api;
 
-        public RepositoryPartner(IPictureManagerContext context)
+        public RepositoryPartner( ApiConnect api)
         {
-            this.context = context;
+            this.api = api;
         }
-        
-        public List<WORKER> GetPartners()
-        {
 
-            List<WORKER> participantes = this.context.GetPartners();
+        
+        public async Task<List<WORKER>> GetPartners()
+        {
+            List<WORKER> participantes = await this.api.CallApi<List<WORKER>>("api/Partner", null);
             return participantes;
         }
 
-        public void InsertPartner(String name, String contact, String urlContact)
+        public async Task InsertPartner(String name, String contact, String urlContact)
         {
-            this.context.InsertPartner(name, contact, urlContact);
+            WORKER w = new WORKER();
+            w.Name = name;
+            w.Contact = contact;
+            w.UrlContact = urlContact;
+            await this.api.CallApiPost(w, "api/Partner/Insert", null);
+
         }
 
-        public void RemovePartner(int id)
+        public async Task RemovePartner(int id)
         {
-            this.context.RemovePartner(id);
+            await this.api.ApiDelete("api/Partner/Delete/" + id,null);
         }
 
-        public void UpdatePartner(int id, String name, String contact, String urlContact)
+        public async Task UpdatePartner(int id, String name, String contact, String urlContact)
         {
-            this.context.UpdatePartner(id, name, contact, urlContact);
+            WORKER w = new WORKER();
+            w.Id = id;
+            w.Name = name;
+            w.Contact = contact;
+            w.UrlContact = urlContact;
+            await this.api.CallApiPost(w, "api/Partner/Modify", null);
         }
 
 

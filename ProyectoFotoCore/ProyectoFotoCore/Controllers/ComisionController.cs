@@ -23,9 +23,9 @@ namespace ProyectoFotoCore.Controllers
             this.prov = prov;
             this.repoAzure = repoAzure;
         }
-        public IActionResult Comision()
+        public async Task<IActionResult> Comision()
         {
-            List<COMISION> comisions = this.repo.GetCOMISIONS();
+            List<COMISION> comisions = await this.repo.GetCOMISIONS();
             return View(comisions);
         }
 
@@ -41,26 +41,26 @@ namespace ProyectoFotoCore.Controllers
                     this.repoAzure.CrearContenedor("comision");
                     await this.repoAzure.SubirBlob("comision", photo, name);
                     String uri = await this.repoAzure.GetUriBlob("comision", name);
-                    repo.InsertComision(name, description, "~/images/comision\\", photo, price, uri);
+                    await repo.InsertComision(name, description, "~/images/comision\\", photo, price, uri);
                 }
             }
             else if (option == "UPDATE")
             {
-                COMISION comision = this.repo.GetComisionByID(id.Value);
+                COMISION comision = await this.repo.GetComisionByID(id.Value);
                 if (comision != null)
                 {
                     await this.repoAzure.SubirBlob("comision", photo, name);
                     String uri = await this.repoAzure.GetUriBlob("comision", name);
-                    repo.ModifyComision(id.Value, name, description, "~/images/comision\\", "", price, uri);
+                    await repo.ModifyComision(id.Value, name, description, "~/images/comision\\", "", price, uri);
                 }
 
             }
             else if (option == "DELETE")
             {
-                COMISION comision = this.repo.GetComisionByID(id.Value);
+                COMISION comision = await this.repo.GetComisionByID(id.Value);
                 if (comision != null)
                 {
-                    repo.DeleteComision(id.Value, path);
+                    await repo.DeleteComision(id.Value);
                     await this.repoAzure.EliminarBlob("comision", name);
                 }
             }

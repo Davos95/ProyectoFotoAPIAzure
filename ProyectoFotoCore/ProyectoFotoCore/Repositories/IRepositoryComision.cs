@@ -11,11 +11,11 @@ namespace ProyectoFotoCore.Repositories
 {
     public interface IRepositoryComision
     {
-        List<COMISION> GetCOMISIONS();
-        void InsertComision(String name, String description, String folder, IFormFile image, float price,String UriAzure);
-        void DeleteComision(int id, String folder);
-        void ModifyComision(int id, String name, String description, String folder, String image, float price, String UriAzure);
-        void OrderComision(String[] order);
-        COMISION GetComisionByID(int id);
+        Task<List<COMISION>> GetCOMISIONS();
+        Task InsertComision(String name, String description, String folder, IFormFile image, float price,String UriAzure);
+        Task DeleteComision(int id);
+        Task ModifyComision(int id, String name, String description, String folder, String image, float price, String UriAzure);
+        Task OrderComision(String[] order);
+        Task<COMISION> GetComisionByID(int id);
     }
 }

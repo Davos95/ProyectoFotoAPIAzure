@@ -53,9 +53,9 @@ namespace ApiProyectoFoto.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public void Order(String[] order)
+        public void Order([FromBody] List<Order> Orders)
         {
-            this.repo.OrderComision(order);
+            this.repo.OrderComision(Orders);
         }
 
     }

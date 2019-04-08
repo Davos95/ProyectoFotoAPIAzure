@@ -26,13 +26,13 @@ namespace ApiProyectoFoto.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public void Insert(String name)
+        public void Insert(WORK w)
         {
-            this.repo.InsertWork(name);
+            this.repo.InsertWork(w.Name);
         }
 
-        [HttpPost]
-        [Route("[action]")]
+        [HttpDelete]
+        [Route("[action]/{id}")]
         public void Delete(int id)
         {
             this.repo.DeleteWork(id);

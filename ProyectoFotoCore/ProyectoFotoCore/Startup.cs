@@ -40,6 +40,7 @@ namespace ProyectoFotoCore
             services.AddTransient<IRepositorySesion, RepositorySesion>();
             services.AddTransient<IRepositoryWork, RepositoryWork>();
             services.AddTransient<PathProv>();
+            services.AddTransient<ApiConnect>();
             services.AddTransient<RepositoryAzureBlob>();
 
 

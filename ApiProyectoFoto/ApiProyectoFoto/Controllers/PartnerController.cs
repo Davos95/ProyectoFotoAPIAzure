@@ -39,7 +39,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpDelete]
-        [Route("[action]")]
+        [Route("[action]/{id}")]
         public void Delete(int id)
         {
             this.repo.RemovePartner(id);

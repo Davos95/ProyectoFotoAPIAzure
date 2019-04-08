@@ -9,10 +9,10 @@ namespace ProyectoFotoCore.Repositories
 {
     public interface IRepositoryPartner
     {
-        List<WORKER> GetPartners();
-        void InsertPartner(String name, String contact, String urlContact);
-        void RemovePartner(int id);
-        void UpdatePartner(int id, String name, String contact, String urlContact);
+        Task<List<WORKER>> GetPartners();
+        Task InsertPartner(String name, String contact, String urlContact);
+        Task RemovePartner(int id);
+        Task UpdatePartner(int id, String name, String contact, String urlContact);
 
     }
 }
