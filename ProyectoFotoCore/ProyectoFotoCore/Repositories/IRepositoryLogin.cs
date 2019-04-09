@@ -10,7 +10,7 @@ namespace ProyectoFotoCore.Repositories
 {
     public interface IRepositoryLogin
     {
-        USER GetUser(String nick, String pwd);
-
+        Task<USER> GetUser(String token);
+        Task<String> GetToken(String nick, String pwd);
     }
 }

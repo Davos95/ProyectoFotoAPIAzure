@@ -40,3 +40,4 @@ C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyec
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorTargetAssemblyInfo.cache
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.dll
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.pdb
+G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

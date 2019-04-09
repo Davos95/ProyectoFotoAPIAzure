@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiProyectoFoto.Models;
 using ApiProyectoFoto.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace ApiProyectoFoto.Controllers
             this.repo = repo;
         }
 
+        [Authorize]
         [HttpGet]
         public List<COMISION> GetComision()
         {

@@ -1,8 +1,10 @@
 ﻿using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Models;
+using ProyectoFotoCore.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,16 +30,21 @@ namespace ProyectoFotoCore.Repositories
 {
     public class RepositoryLogin : IRepositoryLogin
     {
-        IPictureManagerContext context;
-        public RepositoryLogin(IPictureManagerContext context)
+        ApiConnect api;
+        public RepositoryLogin(ApiConnect api)
         {
-            this.context = context;
+            this.api = api;
         }
 
-        public USER GetUser(String nick, String pwd)
+        public async Task<USER> GetUser(String token)
         {
-            USER user = this.context.GetUSER(nick, pwd);
+            USER user = await this.api.CallApi<USER>("api/Auth/GetUSER", token);
             return user;
+        }
+
+        public async Task<String> GetToken(String nick, String pwd)
+        {
+            return await this.api.GetToken(nick, pwd);
         }
 
         private String createMD5Hash(String input)

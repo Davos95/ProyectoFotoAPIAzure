@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiProyectoFoto.Data;
 using ApiProyectoFoto.Repositories;
+using ApiProyectoFoto.Token;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +30,10 @@ namespace ApiProyectoFoto
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            HelperToken helpertoken = new HelperToken(this.configuration);
+
             String cadenaConexionAzure = this.configuration.GetConnectionString("conexionAzure");
+
             services.AddDbContext<IPictureManagerContext, PictureManagerContext>(options => options.UseSqlServer(cadenaConexionAzure));
 
             services.AddTransient<IRepositoryComision, RepositoryComision>();
@@ -38,6 +42,8 @@ namespace ApiProyectoFoto
             services.AddTransient<IRepositoryPhoto, RepositoryPhoto>();
             services.AddTransient<IRepositorySesion, RepositorySesion>();
             services.AddTransient<IRepositoryWork, RepositoryWork>();
+
+            services.AddAuthentication(helpertoken.GetAuthOptions()).AddJwtBearer(helpertoken.GetJwtOptions());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -53,8 +59,10 @@ namespace ApiProyectoFoto
             {
                 app.UseHsts();
             }
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
+            
             app.UseMvc();
         }
     }
