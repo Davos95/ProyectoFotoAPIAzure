@@ -23,10 +23,11 @@
     <main class="grey lighten-4">
         <nav class="white" style="color:black;">
             <div class="nav-wrapper">
-                @Html.ActionLink("Proyecto Foto", "menu", "admin", new { }, new { @class = "brand-logo", @style = "color:black" })
+                <a asp-controller="Front" asp-action="Index" class="brand-logo" style="color:black">Proyecto Foto</a>
+                
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a a class="dropdown-trigger" href="#!" style="color: black">Sesiones</a></li>
-                    <li><a class="dropdown-trigger" href="#!" style="color: black">Comisiones</a></li>
+                    <li><a asp-controller="Front" asp-action="Sessions" style="color: black">Sesiones</a></li>
+                    <li><a asp-controller="Front" asp-action="Comision" class="dropdown-trigger"  style="color: black">Comisiones</a></li>
                 </ul>
             </div>
         </nav>
@@ -39,8 +40,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Proyecto de Clase
-                <a class="grey-text text-lighten-4 right" href="#!">Sitio Web</a>
+                Proyecto MCSD 2018 - 2019
             </div>
         </div>
     </footer>

@@ -52,7 +52,12 @@ namespace ProyectoFotoCore.Controllers
                 COMISION comision = await this.repo.GetComisionByID(id.Value);
                 if (comision != null)
                 {
-                    await this.repoAzure.SubirBlob("comision", photo, name);
+                    if(photo != null && photo.Length > 0)
+                    {
+                        await this.repoAzure.EliminarBlob("comision", name);
+                        await this.repoAzure.SubirBlob("comision", photo, name);
+                    }
+                    
                     String uri = await this.repoAzure.GetUriBlob("comision", name);
                     await repo.ModifyComision(id.Value, name, description, "~/images/comision\\", "", price, uri, token);
                 }

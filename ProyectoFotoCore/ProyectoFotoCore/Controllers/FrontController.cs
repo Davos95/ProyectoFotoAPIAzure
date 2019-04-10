@@ -35,5 +35,23 @@ namespace ProyectoFotoCore.Controllers
         {
             return RedirectToAction("login", "Login");
         }
+
+        public async Task<IActionResult> Sessions()
+        {
+            List<SESSION_COMPLEX> sessions = await this.repoSesion.GetSessionsComplex();
+            return View(sessions);
+        }
+        
+        public async Task<IActionResult> Photos(int id)
+        {
+            List<PHOTO> photos = await this.repoPhoto.GetPhotos(id);
+            return View(photos);
+        }
+
+        public async Task<IActionResult> Comision()
+        {
+            List<COMISION> comisions = await this.repoComision.GetCOMISIONS();
+            return View(comisions);
+        }
     }
 }

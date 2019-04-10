@@ -1,0 +1,36 @@
+﻿@using ProyectoFotoCore.Models
+@model List<COMISION>
+
+@{
+    ViewData["Title"] = "Comision";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+}
+@section events {
+<script>
+    $(document).ready(function(){
+        $('.parallax').parallax();
+    });
+</script>
+}
+@if (Model.Count() > 0)
+{
+    <div class="row">
+        @foreach (COMISION c in Model)
+        {
+            <div class="parallax-container">
+                <div class="parallax">
+                    <img src="@c.UriAzure">
+                </div>
+            </div>
+            <div class="section white">
+                <div class="row container">
+                    <h2 class="header">@c.Name</h2>
+                    <div class="divider"></div>
+                    <p class="grey-text text-darken-3 lighten-3">@c.Description</p>
+                    <p class="grey-text text-darken-3 lighten-3"><b>Precio: @c.Price €</b></p>
+                </div>
+            </div>
+        }
+    </div>
+}
+

@@ -11,6 +11,9 @@ main {
 .buttonWidth{
     width:100%;
 }
+.parallax-containe {
+    height: 30em !important;
+}
 .parallax-container .parallax {
         position: static !important;
 }

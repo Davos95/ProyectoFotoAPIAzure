@@ -86,9 +86,15 @@ function uploadData(arrayImages, sesion) {
                         //$("#divLink").html('<a id="goSession" href="/Sesion/ManagePhotos?idSesion='+sesion+'">link</a>');
                         //$("#goSession").click();
                     }
-                })
+                    })
+
             },1000);
             
+        },
+        error: function () {
+            
+            $("#loading").fadeOut(100);
+            alert("Ha ocurrido un error!");
         }
     });
 
