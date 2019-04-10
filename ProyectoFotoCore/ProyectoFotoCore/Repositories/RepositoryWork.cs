@@ -1,6 +1,4 @@
 ﻿
-
-using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Models;
 using ProyectoFotoCore.Tools;
 using System;
@@ -49,16 +47,16 @@ namespace ProyectoFotoCore.Repositories
             return works;
         }
 
-        public async Task InsertWork(String name)
+        public async Task InsertWork(String name, String token)
         {
             WORK w = new WORK();
             w.Name = name;
-            await this.api.CallApiPost(w, "api/Work/Insert", null);
+            await this.api.CallApiPost(w, "api/Work/Insert", token);
         }
 
-        public async Task DeleteWork(int id)
+        public async Task DeleteWork(int id, String token)
         {
-            await this.api.ApiDelete("api/Work/Delete/" + id, null);
+            await this.api.ApiDelete("api/Work/Delete/" + id, token);
         }
 
     }

@@ -11,7 +11,7 @@ namespace ProyectoFotoCore.Repositories
     public interface IRepositoryWork
     {
         Task<List<WORK>> GetWORKs();
-        Task InsertWork(String name);
-        Task DeleteWork(int id);
+        Task InsertWork(String name, String token);
+        Task DeleteWork(int id, String token);
     }
 }

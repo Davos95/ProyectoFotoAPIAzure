@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Provider;
 using ProyectoFotoCore.Repositories;
 using ProyectoFotoCore.Tools;
@@ -30,9 +29,6 @@ namespace ProyectoFotoCore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            String cadenaConexionAzure = this.configuration.GetConnectionString("conexionAzure");
-            services.AddDbContext<IPictureManagerContext, PictureManagerContext>(options => options.UseSqlServer(cadenaConexionAzure));
-
             services.AddTransient<IRepositoryComision, RepositoryComision>();
             services.AddTransient<IRepositoryLogin, RepositoryLogin>();
             services.AddTransient<IRepositoryPartner, RepositoryPartner>();

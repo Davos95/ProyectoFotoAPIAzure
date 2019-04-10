@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>2bb383fe-7738-4370-a00a-910d62572fb1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\comision\" />
-    <Folder Include="wwwroot\images\session\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 

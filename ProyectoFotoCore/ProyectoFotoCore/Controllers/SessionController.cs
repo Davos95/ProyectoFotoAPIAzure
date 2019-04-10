@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -55,14 +56,17 @@ namespace ProyectoFotoCore.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSesion(String name, String description, DateTime date, int comision)
         {
-            await this.repoSesion.InsertSesion(name, description, date, comision);
+            String token = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+
+            await this.repoSesion.InsertSesion(name, description, date, comision, token);
             return RedirectToAction("Sesion");
         }
         #endregion
 
         public async Task<ActionResult> DeleteSesion(int id, String name)
         {
-            await this.repoSesion.DeleteSesion(id);
+            String token = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+            await this.repoSesion.DeleteSesion(id, token);
             await this.repoBlob.EliminarContenedor("s" + id);
             return RedirectToAction("Sesion");
         }
@@ -84,19 +88,21 @@ namespace ProyectoFotoCore.Controllers
         [HttpPost]
         public async Task<IActionResult> EditSesion(String option, int idSesion, int? idPartner, int? idWork, String name, String description, DateTime? date, int? comision, int? idImage)
         {
+            String token = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+
             if (option == "ADD")
             {
-                await this.repoSesion.AddPartnerWorkIntoSesion(idSesion, idPartner.Value, idWork.Value);
+                await this.repoSesion.AddPartnerWorkIntoSesion(idSesion, idPartner.Value, idWork.Value, token);
             }
             else if (option == "MODIFY")
             {
                 SESSION session = await this.repoSesion.GetSESIONID(idSesion);
                 String sessionName = session.Name;
 
-                await this.repoSesion.ModifySesion(idSesion, name, description, date.Value, comision.Value);
+                await this.repoSesion.ModifySesion(idSesion, name, description, date.Value, comision.Value, token);
             }
             else if (option == "SETIMAGE") {
-                await this.repoSesion.SetImageSession(idSesion, idImage.Value);
+                await this.repoSesion.SetImageSession(idSesion, idImage.Value, token);
             }
 
 
@@ -114,7 +120,8 @@ namespace ProyectoFotoCore.Controllers
 
         public IActionResult DeletePartnerWorkFromSesion(int idSesion, int idPartner, int idWork)
         {
-            this.repoSesion.DeletePartnerWorkFromSesion(idSesion, idPartner, idWork);
+            String token = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+            this.repoSesion.DeletePartnerWorkFromSesion(idSesion, idPartner, idWork, token);
 
             return RedirectToAction("EditSesion", "Session", new { id = idSesion });
         }

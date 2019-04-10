@@ -18,8 +18,8 @@ namespace ProyectoFotoCore.Tools
 
         public ApiConnect()
         {
-            //this.uriapi = "https://apiproyectofoto.azurewebsites.net/";
-            this.uriapi = "https://localhost:44305/";
+            this.uriapi = "https://apiproyectofoto.azurewebsites.net/";
+            //this.uriapi = "https://localhost:44305/";
             this.headerjson = new MediaTypeWithQualityHeaderValue("application/json");
         }
 
@@ -99,7 +99,7 @@ namespace ProyectoFotoCore.Tools
                 String json = JsonConvert.SerializeObject(user);
 
                 StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                String peticion = "Auth/Login";
+                String peticion = "api/Auth/Login";
                 HttpResponseMessage response = await client.PostAsync(peticion, content);
                 if (response.IsSuccessStatusCode)
                 {

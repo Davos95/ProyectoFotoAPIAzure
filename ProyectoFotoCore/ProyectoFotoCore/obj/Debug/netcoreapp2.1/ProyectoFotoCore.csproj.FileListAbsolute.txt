@@ -125,7 +125,6 @@ C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\Proyecto
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\bin\Debug\netcoreapp2.1\ProyectoFotoCore.pdb
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\bin\Debug\netcoreapp2.1\ProyectoFotoCore.Views.dll
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\bin\Debug\netcoreapp2.1\ProyectoFotoCore.Views.pdb
-C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\obj\Debug\netcoreapp2.1\ProyectoFotoCore.csprojAssemblyReference.cache
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\obj\Debug\netcoreapp2.1\ProyectoFotoCore.csproj.CoreCompileInputs.cache
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\obj\Debug\netcoreapp2.1\ProyectoFotoCore.RazorAssemblyInfo.cache
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\obj\Debug\netcoreapp2.1\ProyectoFotoCore.RazorAssemblyInfo.cs
@@ -158,3 +157,4 @@ C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\Proyecto
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\obj\Debug\netcoreapp2.1\ProyectoFotoCore.dll
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\obj\Debug\netcoreapp2.1\ProyectoFotoCore.pdb
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\obj\Debug\netcoreapp2.1\ProyectoFotoCore.csproj.CopyComplete
+C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ProyectoFotoCore\ProyectoFotoCore\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

@@ -6,10 +6,13 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
 
     <environment include="Development">
-
         <link href="~/css/materialize.min.css" rel="stylesheet" />
         <link href="~/css/custom.css" rel="stylesheet" />
+    </environment>
 
+    <environment include="Production">
+        <link href="~/css/materialize.min.css" rel="stylesheet" />
+        <link href="~/css/custom.css" rel="stylesheet" />
     </environment>
 
     @RenderSection("styles", false)
@@ -22,7 +25,7 @@
             <div class="nav-wrapper">
                 @Html.ActionLink("Proyecto Foto", "menu", "admin", new { }, new { @class = "brand-logo", @style = "color:black" })
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a a class="dropdown-trigger" href="#!"  style="color: black">Sesiones</a></li>
+                    <li><a a class="dropdown-trigger" href="#!" style="color: black">Sesiones</a></li>
                     <li><a class="dropdown-trigger" href="#!" style="color: black">Comisiones</a></li>
                 </ul>
             </div>
@@ -43,6 +46,10 @@
     </footer>
 
     <environment include="Development">
+        <script src="~/js/jquery-3.3.1.min.js"></script>
+        <script src="~/js/materialize.min.js"></script>
+    </environment>
+    <environment include="Production">
         <script src="~/js/jquery-3.3.1.min.js"></script>
         <script src="~/js/materialize.min.js"></script>
     </environment>

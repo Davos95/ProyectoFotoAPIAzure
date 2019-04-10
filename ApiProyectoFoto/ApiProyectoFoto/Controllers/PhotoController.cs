@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiProyectoFoto.Models;
 using ApiProyectoFoto.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +35,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Insert(PHOTO p)
         {
@@ -41,6 +43,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Move(PHOTO p)
         {
@@ -48,6 +51,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Order([FromBody] List<Order> orders)
         {
@@ -59,6 +63,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("[action]/{id}")]
         public void Delete(int id)
         {
@@ -73,6 +78,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void SetFavorite(Order o)
         {
@@ -80,6 +86,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void UndoFavorite(Order o)
         {
@@ -87,6 +94,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void OrderFavorite([FromBody] List<Order> orders)
         {

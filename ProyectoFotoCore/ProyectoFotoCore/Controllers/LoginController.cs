@@ -40,7 +40,8 @@ namespace ProyectoFotoCore.Controllers
                 
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
                 identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
-                identity.AddClaim(new Claim(ClaimTypes.Role, user.Role));
+
+                identity.AddClaim(new Claim(ClaimTypes.Role, token));
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
                     new AuthenticationProperties
@@ -48,6 +49,7 @@ namespace ProyectoFotoCore.Controllers
                         IsPersistent = true,
                         ExpiresUtc = DateTime.Now.AddMinutes(10)
                     });
+                
                 HttpContext.Session.SetString("TOKEN", token);
                 
                 return RedirectToAction("menu", "Admin");

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
-using ProyectoFotoCore.Data;
 using ProyectoFotoCore.Models;
 using ProyectoFotoCore.Tools;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -84,7 +84,7 @@ namespace ProyectoFotoCore.Repositories
 
         public async Task<List<COMISION>> GetCOMISIONS()
         {
-             List<COMISION> comisions = await this.api.CallApi<List<COMISION>>("api/Comision",null);
+            List<COMISION> comisions = await this.api.CallApi<List<COMISION>>("api/Comision",null);
             return comisions;
         }
 
@@ -94,7 +94,7 @@ namespace ProyectoFotoCore.Repositories
             return comision;
         }
 
-        public async Task InsertComision(String name, String description, String folder, IFormFile image, float price, String UriAzure)
+        public async Task InsertComision(String name, String description, String folder, IFormFile image, float price, String UriAzure, String token)
         {
             COMISION c = new COMISION();
             c.Name = name;
@@ -102,19 +102,19 @@ namespace ProyectoFotoCore.Repositories
             c.Photo = name;
             c.Price = price;
             c.UriAzure = UriAzure;
-            await this.api.CallApiPost(c, "api/Comision/Insert", null);
+            await this.api.CallApiPost(c, "api/Comision/Insert", token);
         }
 
-        public async Task DeleteComision(int id)
+        public async Task DeleteComision(int id, String token)
         {
             COMISION comision = await GetComisionByID(id);
             if(comision != null)
             {
-              await this.api.ApiDelete("api/Comision/Delete/" + id, null);
+              await this.api.ApiDelete("api/Comision/Delete/" + id, token);
             }
         }
 
-        public async Task ModifyComision(int id, String name, String description, String folder, String image, float price, String UriAzure)
+        public async Task ModifyComision(int id, String name, String description, String folder, String image, float price, String UriAzure, String token)
         {
             COMISION c = new COMISION();
             c.Id = id;
@@ -122,10 +122,10 @@ namespace ProyectoFotoCore.Repositories
             c.Description = description;
             c.Price = price;
             c.UriAzure = UriAzure;
-            await this.api.CallApiPost(c, "api/Comision/Modify", null);
+            await this.api.CallApiPost(c, "api/Comision/Modify", token);
         }
 
-        public async Task OrderComision(String [] order)
+        public async Task OrderComision(String [] order, String token)
         {
             List<Order> orders = new List<Order>();
 
@@ -136,7 +136,7 @@ namespace ProyectoFotoCore.Repositories
                 ord.order = i;
                 orders.Add(ord);
             }
-            await this.api.CallApiPost(orders, "api/Comision/Order", null);
+            await this.api.CallApiPost(orders, "api/Comision/Order", token);
         }
     }
 }

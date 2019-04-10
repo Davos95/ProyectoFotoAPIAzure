@@ -20,7 +20,6 @@ namespace ApiProyectoFoto.Controllers
             this.repo = repo;
         }
 
-        [Authorize]
         [HttpGet]
         public List<COMISION> GetComision()
         {
@@ -35,6 +34,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Insert(COMISION com)
         {
@@ -42,6 +42,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("[action]/{id}")]
         public void Delete(int id)
         {
@@ -49,6 +50,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Modify(COMISION com)
         {
@@ -56,6 +58,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Order([FromBody] List<Order> Orders)
         {

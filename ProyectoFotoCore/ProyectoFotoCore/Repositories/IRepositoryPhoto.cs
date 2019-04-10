@@ -13,16 +13,16 @@ namespace ProyectoFotoCore.Repositories
         Task<List<PHOTO>> GetPhotos(int idSesion);
         Task<PHOTO> GetPhotoById(int idPhoto);
 
-        Task InsertPhoto(String name, int idSesion,String UriAzure);
+        Task InsertPhoto(String name, int idSesion,String UriAzure, String token);
 
-        Task MovePhotosSesion(int idPhoto, int idSesion,String UriAzure);
-        Task OrderPhotos(List<Order> orders);
-        Task RemovePhotos(int idPhoto);
+        Task MovePhotosSesion(int idPhoto, int idSesion,String UriAzure, String token);
+        Task OrderPhotos(List<Order> orders, String token);
+        Task RemovePhotos(int idPhoto, String token);
 
 
         Task<List<PHOTO_COMPLEX>> GetFavorites();
-        Task SetFavorite(int idPhoto);
-        Task UndoFavorite(int idPhoto);
-        Task OrderFavorite(List<Order> orders);
+        Task SetFavorite(int idPhoto, String token);
+        Task UndoFavorite(int idPhoto, String token);
+        Task OrderFavorite(List<Order> orders, String token);
     }
 }

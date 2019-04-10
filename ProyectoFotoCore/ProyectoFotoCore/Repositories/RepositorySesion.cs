@@ -1,5 +1,5 @@
 ﻿
-using ProyectoFotoCore.Data;
+
 using ProyectoFotoCore.Models;
 using ProyectoFotoCore.Tools;
 using System;
@@ -95,17 +95,17 @@ namespace ProyectoFotoCore.Repositories
             return sesion;
         }
 
-        public async Task InsertSesion(String name, String description, DateTime date, int comision)
+        public async Task InsertSesion(String name, String description, DateTime date, int comision, String token)
         {
             SESSION s = new SESSION();
             s.Name = name;
             s.Description = description;
             s.DateSesion = date;
             s.IdComision = comision;
-            await this.api.CallApiPost(s, "api/Session/Insert", null);
+            await this.api.CallApiPost(s, "api/Session/Insert", token);
         }
 
-        public async Task ModifySesion(int idSesion, String name, String desciption, DateTime date, int idComision)
+        public async Task ModifySesion(int idSesion, String name, String desciption, DateTime date, int idComision, String token)
         {
             SESSION s = new SESSION();
             s.Id = idSesion;
@@ -113,12 +113,12 @@ namespace ProyectoFotoCore.Repositories
             s.Description = desciption;
             s.DateSesion = date;
             s.IdComision = idComision;
-            await this.api.CallApiPost(s, "api/Session/Modify", null);
+            await this.api.CallApiPost(s, "api/Session/Modify", token);
         }
 
-        public async Task DeleteSesion(int id)
+        public async Task DeleteSesion(int id, String token)
         {
-            await this.api.ApiDelete("api/Session/Delete/" + id, null);
+            await this.api.ApiDelete("api/Session/Delete/" + id, token);
         }
 
 
@@ -131,22 +131,22 @@ namespace ProyectoFotoCore.Repositories
             return await this.api.CallApi<List<Worker_Session_Complex>>("api/Session/getPartnerWork/"+idSesion, null);
         }
 
-        public async Task AddPartnerWorkIntoSesion(int idSesion, int idPartner, int idWork)
+        public async Task AddPartnerWorkIntoSesion(int idSesion, int idPartner, int idWork, String token)
         {
             SESSION_WORKER sw = new SESSION_WORKER();
             sw.IdSession = idSesion;
             sw.IdWorker = idPartner;
             sw.IdWork = idWork;
-            await this.api.CallApiPost(sw, "api/Session/addPartnerWork", null);
+            await this.api.CallApiPost(sw, "api/Session/addPartnerWork", token);
         }
 
-        public async Task DeletePartnerWorkFromSesion(int idSesion, int idPartner, int idWork)
+        public async Task DeletePartnerWorkFromSesion(int idSesion, int idPartner, int idWork, String token)
         {
             SESSION_WORKER sw = new SESSION_WORKER();
             sw.IdSession = idSesion;
             sw.IdWorker = idPartner;
             sw.IdWork = idWork;
-            await this.api.CallApiPost(sw, "api/Session/deletePartnerWork", null);
+            await this.api.CallApiPost(sw, "api/Session/deletePartnerWork", token);
         }
 
         #endregion
@@ -161,12 +161,12 @@ namespace ProyectoFotoCore.Repositories
             return await this.api.CallApi<SESSION_COMPLEX>("api/Session/GetComplexById/" + idSession, null);
         }
 
-        public async Task SetImageSession(int idSession, int idImage)
+        public async Task SetImageSession(int idSession, int idImage, String token)
         {
             Order order = new Order();
             order.id = idSession;
             order.order = idImage;
-            await this.api.CallApiPost(order, "api/Session/SetImageSession", null);
+            await this.api.CallApiPost(order, "api/Session/SetImageSession", token);
         }
 
     }

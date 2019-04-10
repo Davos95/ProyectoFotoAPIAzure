@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiProyectoFoto.Models;
 using ApiProyectoFoto.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Insert(WORK w)
         {
@@ -32,6 +34,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("[action]/{id}")]
         public void Delete(int id)
         {

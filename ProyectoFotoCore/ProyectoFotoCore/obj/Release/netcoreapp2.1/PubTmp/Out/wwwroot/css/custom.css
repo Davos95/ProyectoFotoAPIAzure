@@ -1,0 +1,78 @@
+﻿
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+.buttonWidth{
+    width:100%;
+}
+.parallax-container .parallax {
+        position: static !important;
+}
+
+.btnMenu {
+    height: 100%;
+    width:100%;
+}
+
+.btnMenuImagen {
+    background-image:url(./images/nikon-camera-wallpaper-4101.jpg);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+}
+.card-title {
+    right:0 !important;
+    padding:12px !important;
+    left: auto !important;
+}
+
+.card-content-padding {
+    padding: 0px 24px 24px 24px !important;
+}
+
+/* Nav Dropdown */
+li>.dropdown-content {
+    top: 64px !important;
+}
+.dropdown-content>li>a{
+    color: white;
+}
+
+.dropdown-content > li:hover {
+    background-color: #616161;
+}
+
+
+/* Tabla de Participantes  */
+.tbpar thead, .tbpar tbody {
+    display: block;
+}
+
+.tbpar tbody {
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tbpar table {
+    width: 100%;
+}
+
+
+
+@media only screen and (max-width: 992px) {
+    .tbpar tbody td, thead th {
+        width: auto !important;
+    }
+    .tbpar tbody {
+        height: 150px;
+    }
+    .tbpar tr > td:last-child {
+        display: none !important;
+    }
+}

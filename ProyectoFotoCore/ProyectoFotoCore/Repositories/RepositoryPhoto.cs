@@ -1,4 +1,4 @@
-﻿using ProyectoFotoCore.Data;
+﻿
 using ProyectoFotoCore.Models;
 using ProyectoFotoCore.Tools;
 using System;
@@ -100,8 +100,6 @@ namespace ProyectoFotoCore.Repositories
             this.api = api;
         }
 
-       
-
         public async Task<PHOTO> GetPhotoById(int idPhoto)
         {
             return await this.api.CallApi<PHOTO>("api/Photo/GetPhotoById/" + idPhoto, null);
@@ -112,34 +110,34 @@ namespace ProyectoFotoCore.Repositories
             return await this.api.CallApi<List<PHOTO>>("api/Photo/GetPhotos/" + idSesion, null);
         }
 
-        public async Task InsertPhoto(string name, int idSesion, String UriAzure)
+        public async Task InsertPhoto(string name, int idSesion, String UriAzure, String token)
         {
             PHOTO p = new PHOTO();
             p.Picture = name;
             p.IdSession = idSesion;
             p.UriAzure = UriAzure;
 
-            await this.api.CallApiPost(p, "api/Photo/Insert", null);
+            await this.api.CallApiPost(p, "api/Photo/Insert", token);
         }
 
-        public async Task MovePhotosSesion(int idPhoto, int idSesion,String UriAzure)
+        public async Task MovePhotosSesion(int idPhoto, int idSesion,String UriAzure, String token)
         {
             PHOTO p = new PHOTO();
             p.Id = idPhoto;
             p.IdSession = idSesion;
             p.UriAzure = UriAzure;
-            await this.api.CallApiPost(p, "api/Photo/Move", null);
+            await this.api.CallApiPost(p, "api/Photo/Move", token);
         }
 
-        public async Task OrderPhotos(List<Order> orders)
+        public async Task OrderPhotos(List<Order> orders, String token)
         {
-            await this.api.CallApiPost(orders, "api/Photo/Order", null);
+            await this.api.CallApiPost(orders, "api/Photo/Order", token);
         }
 
 
-        public async Task RemovePhotos(int idPhoto)
+        public async Task RemovePhotos(int idPhoto, String token)
         {
-            await this.api.ApiDelete("api/Photo/Delete/" + idPhoto, null);
+            await this.api.ApiDelete("api/Photo/Delete/" + idPhoto, token);
         }
 
         #region Favorites
@@ -148,23 +146,23 @@ namespace ProyectoFotoCore.Repositories
             return await this.api.CallApi<List<PHOTO_COMPLEX>>("api/Photo/Favorites", null);
         }
 
-        public async Task SetFavorite(int idPhoto)
+        public async Task SetFavorite(int idPhoto, String token)
         {
             Order order = new Order();
             order.id = idPhoto;
-            await this.api.CallApiPost(order, "api/Photo/SetFavorite", null);
+            await this.api.CallApiPost(order, "api/Photo/SetFavorite", token);
         }
 
-        public async Task UndoFavorite(int idPhoto)
+        public async Task UndoFavorite(int idPhoto, String token)
         {
             Order order = new Order();
             order.id = idPhoto;
-            await this.api.CallApiPost(order, "api/Photo/UndoFavorite", null);
+            await this.api.CallApiPost(order, "api/Photo/UndoFavorite", token);
         }
 
-        public async Task OrderFavorite(List<Order> orders)
+        public async Task OrderFavorite(List<Order> orders, String token)
         {
-            await this.api.CallApiPost(orders, "api/Photo/OrderFavorite", null);
+            await this.api.CallApiPost(orders, "api/Photo/OrderFavorite", token);
         }
 
         #endregion

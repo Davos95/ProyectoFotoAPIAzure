@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoFotoCore.Filters;
@@ -31,14 +32,15 @@ namespace ProyectoFotoCore.Controllers
         [HttpPost]
         public async Task<IActionResult> Partners(String name, String contact, String urlContact, int option, int? id)
         {
+            String token = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
             if (option == 1)
             {
-                await this.repoP.InsertPartner(name, contact, urlContact);
+                await this.repoP.InsertPartner(name, contact, urlContact, token);
             }
             else
             if (option == 2)
             {
-                await this.repoP.UpdatePartner(id.Value, name, contact, urlContact);
+                await this.repoP.UpdatePartner(id.Value, name, contact, urlContact, token);
             }
 
             List<WORKER> p = await this.repoP.GetPartners();
@@ -47,7 +49,8 @@ namespace ProyectoFotoCore.Controllers
 
         public async Task<IActionResult> DeletePartner(int id)
         {
-            await this.repoP.RemovePartner(id);
+            String token = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+            await this.repoP.RemovePartner(id, token);
             return RedirectToAction("Partners");
         }
 
@@ -62,9 +65,10 @@ namespace ProyectoFotoCore.Controllers
         [HttpPost]
         public async Task<ActionResult> Works(String work, int option, int? id)
         {
+            String token = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
             if (option == 0)
             {
-                await this.repoW.InsertWork(work);
+                await this.repoW.InsertWork(work, token);
             }
 
             List<WORK> works = await this.repoW.GetWORKs();
@@ -73,7 +77,8 @@ namespace ProyectoFotoCore.Controllers
 
         public async Task<IActionResult> DeleteWork(int id)
         {
-            await this.repoW.DeleteWork(id);
+            String token = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+            await this.repoW.DeleteWork(id,token);
 
             return RedirectToAction("Works");
         }

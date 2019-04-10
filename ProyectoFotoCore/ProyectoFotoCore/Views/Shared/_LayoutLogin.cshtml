@@ -8,6 +8,12 @@
         <link href="~/css/materialize.min.css" rel="stylesheet" />
         <link href="~/css/custom.css" rel="stylesheet" />
     </environment>
+
+    <environment include="Production">
+        <link href="~/css/materialize.min.css" rel="stylesheet" />
+        <link href="~/css/custom.css" rel="stylesheet" />
+    </environment>
+
     @RenderSection("styles", false)
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -28,6 +34,12 @@
     </footer>
 
     <environment include="Development">
+        <script src="~/js/jquery-3.3.1.min.js"></script>
+        <script src="~/js/materialize.min.js"></script>
+        <script src="~/js/menuDropdown.js"></script>
+    </environment>
+
+    <environment include="Production">
         <script src="~/js/jquery-3.3.1.min.js"></script>
         <script src="~/js/materialize.min.js"></script>
         <script src="~/js/menuDropdown.js"></script>

@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Http;
-using ProyectoFotoCore.Data;
+
 using ProyectoFotoCore.Models;
 using ProyectoFotoCore.Tools;
 using System;
@@ -62,29 +62,29 @@ namespace ProyectoFotoCore.Repositories
             return participantes;
         }
 
-        public async Task InsertPartner(String name, String contact, String urlContact)
+        public async Task InsertPartner(String name, String contact, String urlContact, String token)
         {
             WORKER w = new WORKER();
             w.Name = name;
             w.Contact = contact;
             w.UrlContact = urlContact;
-            await this.api.CallApiPost(w, "api/Partner/Insert", null);
+            await this.api.CallApiPost(w, "api/Partner/Insert", token);
 
         }
 
-        public async Task RemovePartner(int id)
+        public async Task RemovePartner(int id, String token)
         {
-            await this.api.ApiDelete("api/Partner/Delete/" + id,null);
+            await this.api.ApiDelete("api/Partner/Delete/" + id, token);
         }
 
-        public async Task UpdatePartner(int id, String name, String contact, String urlContact)
+        public async Task UpdatePartner(int id, String name, String contact, String urlContact, String token)
         {
             WORKER w = new WORKER();
             w.Id = id;
             w.Name = name;
             w.Contact = contact;
             w.UrlContact = urlContact;
-            await this.api.CallApiPost(w, "api/Partner/Modify", null);
+            await this.api.CallApiPost(w, "api/Partner/Modify", token);
         }
 
 

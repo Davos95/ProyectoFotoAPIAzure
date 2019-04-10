@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiProyectoFoto.Models;
 using ApiProyectoFoto.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Insert(SESSION s)
         {
@@ -40,6 +42,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void Modify(SESSION s)
         {
@@ -47,6 +50,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("[action]/{id}")]
         public void Delete(int id)
         {
@@ -63,6 +67,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void addPartnerWork(SESSION_WORKER s)
         {
@@ -70,6 +75,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void deletePartnerWork(SESSION_WORKER s)
         {
@@ -94,6 +100,7 @@ namespace ApiProyectoFoto.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("[action]")]
         public void SetImageSession(Order o)
         {

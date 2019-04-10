@@ -31,7 +31,6 @@ C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyec
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.runtimeconfig.dev.json
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.dll
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\bin\Debug\netcoreapp2.1\ApiProyectoFoto.pdb
-C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.csprojAssemblyReference.cache
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.csproj.CoreCompileInputs.cache
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorAssemblyInfo.cache
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.RazorAssemblyInfo.cs
@@ -41,3 +40,4 @@ C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyec
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.dll
 C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\ApiProyectoFoto.pdb
 G:\Proyectos\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\AlumnoMCSD\source\Github\ProyectoFotoAPIAzure\ApiProyectoFoto\ApiProyectoFoto\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

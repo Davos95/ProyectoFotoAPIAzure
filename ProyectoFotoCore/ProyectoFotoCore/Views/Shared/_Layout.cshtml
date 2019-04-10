@@ -7,12 +7,15 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
 
     <environment include="Development">
-
         <link href="~/css/materialize.min.css" rel="stylesheet" />
         <link href="~/css/custom.css" rel="stylesheet" />
-
     </environment>
-        
+    
+    <environment include="Production">
+        <link href="~/css/materialize.min.css" rel="stylesheet" />
+        <link href="~/css/custom.css" rel="stylesheet" />
+    </environment>
+
         @RenderSection("styles", false)
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -40,10 +43,10 @@
                     <li><a a class="dropdown-trigger" href="#!" data-target="dropdownSesion">Sesiones</a></li>
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdownPT">Participantes y Trabajos<i class="material-icons right"></i></a></li>
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdownComision">Comisiones<i class="material-icons right"></i></a></li>
-                   @if (Context.User.Identity.IsAuthenticated)
-                   {
+                    @if (Context.User.Identity.IsAuthenticated)
+                    {
                         <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "login")</li>
-                   }
+                    }
                 </ul>
             </div>
         </nav>
@@ -63,6 +66,11 @@
     </footer>
 
     <environment include="Development">
+        <script src="~/js/jquery-3.3.1.min.js"></script>
+        <script src="~/js/materialize.min.js"></script>
+        <script src="~/js/menuDropdown.js"></script>
+    </environment>
+    <environment include="Production">
         <script src="~/js/jquery-3.3.1.min.js"></script>
         <script src="~/js/materialize.min.js"></script>
         <script src="~/js/menuDropdown.js"></script>

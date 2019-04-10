@@ -14,7 +14,6 @@ namespace ProyectoFotoCore.Filters
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var usuario = context.HttpContext.User;
-            bool isadmin = usuario.IsInRole("ADMINISTRATOR");
             if (usuario.Identity.IsAuthenticated == false)
             {
                 RouteValueDictionary rutalogin = new RouteValueDictionary( 
